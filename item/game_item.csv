@@ -1,0 +1,5 @@
+id, name       , attack, defence, damage, price
+ 0, dagger     , 1d4+0 , 1d4+0  , 1d4+0 ,    10
+ 1, sword      , 1d6+1 , 1d6+0  , 1d6+0 ,    15
+10, smalll shield, 1d2+0, 1d6+0, 0d0+0, 30
+ 105, plate armor, 0d0+0 , 2d6+1  , 0d0+0 ,   110
