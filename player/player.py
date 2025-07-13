@@ -1,12 +1,33 @@
-import uuid
+
+import random
 from dice import Dice as dc
 from font import font as ft
 from screen import screen as sc
 from var_and_const import var_and_const as vc
 from maze import maze as mz
 import guild,castle
-￼￼
+
+####====================================
+
 NAME_FILE = "/home/kawabe/MEGA/python/pyxel/dungeon/name.csv"
+
+def random_name():
+    with open(NAME_FILE,'r') as f:
+        names = f.readlines()
+        l_of_names = len(names)
+        p = random.randint(1,100) #50%->1name, 25%->2names, rest->3names
+        result = ''
+        if p <= 70:
+            n = 1
+        elif p <= 90:
+            n = 2
+        else:
+            n = 3
+        for i in range(n):
+            result += names[random.randint(1,l_of_names)]
+            result += ' '
+        result = result[:-1] #最後のスペースを除いて、
+        return(result[1:16]) # 名前は最大半角16文字(全角8文字)
 
 ####====================================
 
@@ -16,7 +37,49 @@ PARTY_MAX = 4
 ####
 #### SCREEN SECTION
 
+def job_str(j):
+    match j:
+        case "fighter":
+            return("せんし")
+        case "thief":
+            return("とうぞく")
+        case "mage":
+            return("じゅつし")
+        case _:
+            return("いっぱん")
+
+####------------------------------------
+
+def status_str(p):
+    str = ""
+    if p.status:
+        for i in p.status:
+            match i:
+                case "poison":
+                    result += "毒"
+                case "paralyse":
+                    result += "麻"
+                case "stoned":
+                    result += "石"
+                case "dead":
+                    result = "死亡"    
+                case _:
+                    result += "？"
+    else:
+        i = p.hp / p.hp_max
+        match i:
+            case i if i<=0.1:
+                str = "じゅうしょう"
+            case i if i<=0.25:
+                str = "やばい"
+            case i if i<=50:
+                pass
+
+
+####------------------------------------
+
 def list_party_members(p):
+
     pass
 
 ####====================================
