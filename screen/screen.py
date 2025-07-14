@@ -29,6 +29,10 @@ TEXT_BOTTOM = TEXT_HEIGHT -1 #25
 TITLE_LEFT = 0
 TITLE_RIGHT = TEXT_WIDTH -1
 
+####------------------------------------
+
+PARTY_MEMBER_TOP = TEXT_BOTTOM - 5
+
 ####====================================
 
 def text12(x,y,str,c):

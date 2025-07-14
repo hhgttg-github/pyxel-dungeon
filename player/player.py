@@ -78,12 +78,18 @@ def status_str(p):
                 result = "げんき"
     return(f"{result:<8}")
 
+####------------------------------------
+
+def line_of_member(m): # m -> PLAYER CLASS
 
 ####------------------------------------
 
 def list_party_members(p):
+    index = 0
+    for i in p.members:
+        s = f"{index+1:2>} {line_of_member(i)}"
+        sc.text12(1, sc.PARTY_MEMBER_TOP+index, s, 7)
 
-    pass
 
 ####====================================
 
