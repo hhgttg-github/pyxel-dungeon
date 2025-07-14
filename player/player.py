@@ -51,7 +51,7 @@ def job_str(j):
 ####------------------------------------
 
 def status_str(p):
-    str = ""
+    result = ""
     if p.status:
         for i in p.status:
             match i:
@@ -81,6 +81,9 @@ def status_str(p):
 ####------------------------------------
 
 def line_of_member(m): # m -> PLAYER CLASS
+    return(f"{m.name:<16}" + 
+           f"{job_str(m.job):<5}" + 
+           f"{status_str(m)}")
 
 ####------------------------------------
 
