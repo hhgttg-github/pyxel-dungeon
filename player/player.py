@@ -68,12 +68,15 @@ def status_str(p):
     else:
         i = p.hp / p.hp_max
         match i:
-            case i if i<=0.1:
-                str = "じゅうしょう"
             case i if i<=0.25:
-                str = "やばい"
-            case i if i<=50:
-                pass
+                result = "じゅうしょう"
+            case i if i<=0.5:
+                result = "やばい"
+            case i if i<=0.9:
+                result = "ちょっと"
+            case _:
+                result = "げんき"
+    return(f"{result:<8}")
 
 
 ####------------------------------------
