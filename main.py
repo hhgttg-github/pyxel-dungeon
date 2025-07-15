@@ -3,7 +3,9 @@ from var_and_const import var_and_const as vc
 from sprite import sprite as sp
 from dice import dice as dc
 from font import font as ft
-import castle, maze, guild, player, item, monster
+from item import item
+from monster import monster
+import castle, maze, guild, player
 
 # from castle import castle
 # from maze import maze

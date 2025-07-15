@@ -1,11 +1,13 @@
-sys.path.append("/home/kawabe/MEGA/python/pyxel/dungeon")
-import sys, os, csv
+#sys.path.append("/home/kawabe/MEGA/python/pyxel/dungeon")
+import sys
+import os
+import csv
 from dice import dice
 from var_and_const import var_and_const as vc
 
 ####====================================
 
-MONSTER_CSV_FILE = "/home/kawabe/MEGA/python/pyxel/dungeon/monster/game_monster.csv"
+MONSTER_CSV_FILE = "/home/kawabe/python/pyxel/pyxel-dungeon/monster/game_monster.csv"
 
 ####====================================
 

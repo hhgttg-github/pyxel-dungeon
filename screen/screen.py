@@ -182,6 +182,14 @@ def draw_list(l,top=0, number=False, alphabet=False):
 def draw_guild_main_menu():
     pass
 
+####
+####....................................
+####
+
+def screen_init():
+    pyxel.init(SCREEN_WIDTH,SCREEN_HEIGHT)
+    pyxel.cls(0)
+
 ####====================================
 
 if __name__=="__main__":

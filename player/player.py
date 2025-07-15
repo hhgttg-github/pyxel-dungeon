@@ -110,7 +110,7 @@ class Party:
     def add(self,p):
         self.members.append(p)
 #        self.members.append(vc.game.guild.member[id])
-    def join_from_guild(self,guil):
+    def join_from_guild(self,guild):
         for i in guild.members:
             if i.in_maze:
                 self.members.append(i)

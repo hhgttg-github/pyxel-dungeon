@@ -1,6 +1,6 @@
 import os, pickle,uuid, pyxel
-import player.player
-import screen as sc
+#import player.player
+from screen import screen as sc
 import var_and_const as vc
 import player, monster, item, maze
 
@@ -14,6 +14,8 @@ LIST_GUILD_MEMBER_TOP = 1
 LIST_GUILD_MENU_TOP = 12
 LIST_PARTY_MEMBER_TOP = 23
 
+GUILD_MAIN_MENU_TOP = sc.TEXT_HEIGHT-4
+
 def list_guild_members(g):
     sc.title_center("ぼうけんしゃギルド")
     l = []
@@ -23,23 +25,24 @@ def list_guild_members(g):
     sc.lin
 
 def draw_guild_main_menu():
-    sc.line_horizontal(sc.TEXT_HEIGHT-4,"- ")
-    sc.text12(0,sc.TEXT_HEIGHT-3,"I)nspect, A)dd to party, R)emove from party")
-    sc.text12(0,sc.TEXT_HEIGHT-2,"C)reate Newbi, D)elete Member, [ESC]L)eave Guild")
+    sc.line_horizontal(GUILD_MAIN_MENU_TOP-1,"- ")
+    sc.text12( 2,GUILD_MAIN_MENU_TOP,"I)nspect,   A)dd to party,   R)emove from party",7)
+    sc.text12( 2,GUILD_MAIN_MENU_TOP+1,"C)reate Newbi,   D)elete Member",7)
+    sc.text12(18,GUILD_MAIN_MENU_TOP+2,"[ESC] = L)eave Guild",7)
     
 ####====================================
 
 GUILD_MAX = 20
 
-MAIN_GUILD_KEYS = [pyxel.KEY_I,                # INSPECT
-                   pyxel.KEY_C, pyxel.KEY_D,   # CREATE, DELETE
-                   pyxel.KEY_A, pyxel.KEY_R,   # ADD, REMOVE to party
-                   pyxel.KEY_S, pyxel.KEY_L,   # SAVE, LOAD
-                   pyxel.KEY_L, pyxel.KEY_ESC] # EXIT GUILD
+MAIN_GUILD_KEYS = [pyxel.KEY_I,                   # INSPECT
+                   pyxel.KEY_C, pyxel.KEY_D,      # CREATE, DELETE
+                   pyxel.KEY_A, pyxel.KEY_R,      # ADD, REMOVE to party
+                   pyxel.KEY_S, pyxel.KEY_L,      # SAVE, LOAD
+                   pyxel.KEY_L, pyxel.KEY_ESCAPE] # EXIT GUILD
 
 ####====================================
 
-def new_plaer():
+def new_player():
     
     sc.text12(8,13,"あらたに参加するかたの仕事は？　（[ESC]でキャンセル）",7)
     sc.text12(15,14,"A) 戦士",7)
@@ -65,10 +68,10 @@ def new_plaer():
 class Guild:
     def __init__(self):
         if os.path.exists(GUILD_FILE):
-            self.load_guild(self)
+            self.load_guild()
         else:
             self.member       = []
-            self.save_guild(self)
+            self.save_guild()
     def form_party(self,p):
         if self.member:
             for i in self.member:
@@ -125,3 +128,10 @@ class Guild:
         self.draw_guild_main_menu()
         vc.party.draw()
         
+if __name__=="__main__":
+    sc.screen_init()
+    g = Guild()
+    draw_guild_main_menu()
+
+    pyxel.show()
+
