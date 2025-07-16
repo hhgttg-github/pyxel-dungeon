@@ -8,10 +8,12 @@ from font import font as ft
 #### KEY_INPUT
 
 def key_input(l):
-    while True:
-        for k in l:
-            if pyxel.btnp(k):
-                return(k)
+    result=None
+    for k in l:
+        if pyxel.btn(k):
+            result = k
+    print(result)
+    return(result)
 
 ####====================================
 
@@ -179,15 +181,11 @@ def draw_list(l,top=0, number=False, alphabet=False):
     
 ####====================================
 
-def draw_guild_main_menu():
-    pass
-
-####
 ####....................................
 ####
 
 def screen_init():
-    pyxel.init(SCREEN_WIDTH,SCREEN_HEIGHT)
+    pyxel.init(SCREEN_WIDTH,SCREEN_HEIGHT,display_scale=2)
     pyxel.cls(0)
 
 ####====================================

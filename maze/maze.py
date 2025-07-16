@@ -68,7 +68,7 @@ WORLD_CSV = "/home/kawabe/MEGA/python/pyxel/dungeon/game_wordl.csv"
 
 ####====================================
 
-class World:
+class World():
     def __init__(self):
         self.mz = [Maze() for _ in range(WORLD_SIZE)]
         for wxy in range(WORLD_SIZE):
