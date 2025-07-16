@@ -3,13 +3,13 @@ from var_and_const import var_and_const as vc
 from sprite  import sprite as sp
 from font    import font as ft
 from screen  import screen as sc
-# from item    import item
-# from monster import monster
-from maze import maze
+from maze    import maze
 from guild   import guild
 from castle  import castle
-# from player  import player
-import item, monster, player
+from player  import player
+
+# from item    import item
+# from monster import monster
 
 # # from castle import castle
 # # from maze import maze
@@ -44,7 +44,6 @@ class Game:
 # ####////////////////////////////////////
 
     def update(self):
-        print("Game Update")
         self.scene[self.state].update()
 
     def draw(self):

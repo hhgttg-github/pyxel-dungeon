@@ -1,8 +1,9 @@
+
 import os, pickle,uuid, pyxel
-#import player.player
-from screen import screen as sc
+
 import var_and_const as vc
-import player, monster, item, maze
+from player import player
+from screen import screen as sc
 
 GUILD_FILE = "/home/kawabe/python/pyxel/pyxel-dungeon/guild/game_guild.pickle"
 
@@ -30,21 +31,27 @@ MAIN_GUILD_KEYS = [pyxel.KEY_I,                   # INSPECT
 ####====================================
 
 def new_player():
-    
-    sc.text12(8,13,"あらたに参加するかたの仕事は？　（[ESC]でキャンセル）",7)
+    print("new_player")
+    sc.text12(8,13,"職業は？ [ESC]=キャンセル",7)
     sc.text12(15,14,"A) 戦士",7)
     sc.text12(15,15,"B) 盗賊",7)
     sc.text12(15,16,"C) 魔法使い",7)
-
     keys = [pyxel.KEY_A, pyxel.KEY_B,pyxel.KEY_C, pyxel.KEY_ESCAPE]
-    result = sc.key_input(keys)
+    result = None
+    while result == None:
+        pyxel.flip()
+        result = sc.key_input(keys)
+    print(f"result={result}")
     p = player.Player()
     match result:
         case pyxel.KEY_A:
+            print("job=fighter")
             return(p.create("fighter"))
         case pyxel.KEY_B:
+            print("job=thief")
             return(p.create("thief"))
         case pyxel.KEY_C:
+            print("job=mage")
             return(p.create("mage"))
         case _:
             return(False)
@@ -69,6 +76,7 @@ class Guild:
     def inspect(self):
         pass
     def create_newbie(self):
+        print("create_newbie")
         p = new_player()
         if p:
             self.member.append(p)
@@ -107,7 +115,6 @@ class Guild:
 ####////////////////////////////////////
 
     def update(self):
-        print("Guild Update")
         k = sc.key_input(MAIN_GUILD_KEYS)
         match k:
             case pyxel.KEY_I:

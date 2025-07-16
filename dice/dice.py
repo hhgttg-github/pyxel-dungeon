@@ -13,6 +13,11 @@ class Dice:
                 self.n=int(str[0:i])
                 self.d=int(str[i+1:pm])
                 self.p=int(str[pm:])
+    def __str__(self):
+        if self.p>=0:
+            return(f"{self.n}d{self.d} + {self.p}")
+        else:
+            return(f"{self.n}d{self.d} - {self.p}")
     def roll(self):
         result = 0
         for i in range(self.n):

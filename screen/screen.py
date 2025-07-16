@@ -10,7 +10,7 @@ from font import font as ft
 def key_input(l):
     result=None
     for k in l:
-        if pyxel.btn(k):
+        if pyxel.btnp(k):
             result = k
     print(result)
     return(result)

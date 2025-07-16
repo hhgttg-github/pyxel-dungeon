@@ -1,6 +1,6 @@
 
 import random
-from dice import Dice as dc
+from dice import dice as dc
 from font import font as ft
 from screen import screen as sc
 from var_and_const import var_and_const as vc
@@ -132,6 +132,17 @@ class Player:
         self.hp = None
         self.hp_max = None
         self.equip = {"weapon":None,"armor":None,"shield":None,"others":None}
+    def __repr__(self):
+        return (f"self.in_maze = {self.in_maze!r}\n"
+                f"self.name = {self.name!r}\n"
+                f"self.job = {self.job!r}\n"
+                f"self.status = {self.status!r}\n"
+                f"self.attack = {self.attack!r}\n"
+                f"self.defence = {self.defence!r}\n"
+                f"self.magic = {self.magic!r}\n"
+                f"self.hp = {self.hp!r}\n"
+                f"self.hp_max = {self.hp_max!r}\n"
+                f"self.equip = {self.equip!r}")
     def create(self,job):
         match job:
             case "fighter":
