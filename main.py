@@ -8,8 +8,8 @@ from screen  import screen as sc
 from maze import maze
 from guild   import guild
 from castle  import castle
-# from player  import player
-import item, monster, player
+from player  import player
+import item, monster
 
 # # from castle import castle
 # # from maze import maze

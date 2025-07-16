@@ -1,8 +1,8 @@
-import os, pickle,uuid, pyxel
-#import player.player
+import os, pickle, pyxel
 from screen import screen as sc
-import var_and_const as vc
-import player, monster, item, maze
+from var_and_const import var_and_const as vc
+from player import player
+import monster, item, maze
 
 GUILD_FILE = "/home/kawabe/python/pyxel/pyxel-dungeon/guild/game_guild.pickle"
 
