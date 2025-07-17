@@ -81,19 +81,24 @@ def status_str(p):
 
 ####------------------------------------
 
-def line_of_member(m): # m -> PLAYER CLASS
-    return(f"{m.name:<16}" + 
-           f"{job_str(m.job):<5}" + 
-           f"{status_str(m)}")
+def str_for_member(p):  # p -> PLAYER CLASS
+    if p:
+        return(f"{p.name:<16}" + 
+               f"{job_str(p.job):<5}" + 
+               f"{status_str(p)}")
 
 ####------------------------------------
 
 def list_party_members(p):
-    index = 0
-    for i in p.members:
-        s = f"{index+1:2>} {line_of_member(i)}"
-        sc.text12(1, sc.PARTY_MEMBER_TOP+index, s, 7)
-
+    sc.line_horizontal(sc.TEXT_BOTTOM-5,'-')
+    index = 1
+    for i in range(PARTY_MAX):
+        if p.members[i]:
+            s = f"{index:2>} {str_for_member(i)}"
+        else:
+            s = f"{index:2}"
+        sc.text12(0, sc.PARTY_MEMBER_TOP+index, s, 7)
+        index += 1
 
 ####====================================
 

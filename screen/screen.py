@@ -34,7 +34,22 @@ TITLE_RIGHT = TEXT_WIDTH -1
 
 ####------------------------------------
 
+CENTER_MENU_TOP = 12
 PARTY_MEMBER_TOP = TEXT_BOTTOM - 5
+
+####====================================
+
+AREA_TOP = (0,0)
+AREA_GUILD_MEMBER = (1,10)
+AREA_CENTER_MENU  = (12,PARTY_MEMBER_TOP-2)
+AREA_PARTY_MEMBER = (PARTY_MEMBER_TOP, TEXT_BOTTOM)
+
+def fill_horizontal_line(y,c):
+    pyxel.rect(0,y*ft.FONT12_HEIGHT,SCREEN_WIDTH,ft.FONT12_HEIGHT,c)
+
+def clear_area(a):
+    for y in range(a[0],a[1]):
+        fill_horizontal_line(y,0)
 
 ####====================================
 
@@ -80,7 +95,7 @@ def titlebox_right(str):
 ####------------------------------------
 
 def title_color(y,c):
-    pyxel.rect(0,y*ft.FONT12_HEIGHT,SCREEN_WIDTH,ft.FONT12_HEIGHT,c)
+    fill_horizontal_line(0,c)
     
 def title_left(y,str,c):
     text12(0,y,str,c)
