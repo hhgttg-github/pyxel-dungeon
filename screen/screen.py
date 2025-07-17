@@ -12,7 +12,8 @@ def key_input(l):
     for k in l:
         if pyxel.btnp(k):
             result = k
-    print(result)
+    if result == pyxel.KEY_ESCAPE:
+        print("KEY_ESCAPE")
     return(result)
 
 ####====================================
@@ -129,7 +130,7 @@ def draw_list1(l,top,left,number=False,alphabet=False):
 
 #---------------------------------------
 
-def draw_list2(l,top,number,alphabet):
+def draw_list2(l,top,number=False,alphabet=False):
     """項目はひとつ12文字以内におさめること"""
     COL_WIDTH = TEXT_WIDTH // 2
     if alphabet:

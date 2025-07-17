@@ -9,7 +9,7 @@ import guild,castle
 
 ####====================================
 
-NAME_FILE = "/home/kawabe/MEGA/python/pyxel/dungeon/name.csv"
+NAME_FILE = "/home/kawabe/python/pyxel/pyxel-dungeon/player/name.csv"
 
 def random_name():
     with open(NAME_FILE,'r') as f:
@@ -24,10 +24,11 @@ def random_name():
         else:
             n = 3
         for i in range(n):
-            result += names[random.randint(1,l_of_names)]
+            m = names[random.randint(1,l_of_names)]
+            result += m.strip()
             result += ' '
         result = result[:-1] #最後のスペースを除いて、
-        return(result[1:16]) # 名前は最大半角16文字(全角8文字)
+        return(result[:16].title()) # 名前は最大半角16文字(全角8文字)
 
 ####====================================
 
@@ -114,11 +115,19 @@ class Party:
         for i in guild.members:
             if i.in_maze:
                 self.members.append(i)
+
+#####////////////////////////////////////
+    
     def update(self):
         for i in self.members:
             i.update()
+
+#####////////////////////////////////////
+
     def draw(self):
         list_party_members(self.members)
+
+####====================================
 
 class Player:
     def __init__(self):
@@ -143,33 +152,41 @@ class Player:
                 f"self.hp = {self.hp!r}\n"
                 f"self.hp_max = {self.hp_max!r}\n"
                 f"self.equip = {self.equip!r}")
-    def create(self,job):
+    def get_job(self,job):
         match job:
             case "fighter":
+                self.job = job
                 self.attack  = dc.Dice("1d8+0")
                 self.defence = dc.Dice("1d8+0")
                 self.magic   = dc.Dice("1d4+0")
                 self.hp = self.hp_max = 12
                 # 新しいデフォルトの装備も必要
             case "thief":
+                self.job = job
                 self.attack  = dc.Dice("1d6+0")
                 self.defence = dc.Dice("1d8+0")
                 self.magic   = dc.Dice("1d4+0")
                 self.hp = self.hp_max = 8
             case "mage":
+                self.job = job
                 self.attack  = dc.Dice("1d4+0")
                 self.defence = dc.Dice("1d4+0")
                 self.magic   = dc.Dice("1d8+0")
                 self.hp = self.hp_max = 6
             case _:
+                self.job = None
                 self.attack  = dc.Dice("1d4+0")
                 self.defence = dc.Dice("1d4+0")
                 self.magic   = dc.Dice("1d4+0")
                 self.hp = self.hp_max = 4
+        print(f"get_job({self})")
 
+#####////////////////////////////////////
 
     def update(self):
         pass
+
+#####////////////////////////////////////
 
 class Camp:
     def __init__(self):

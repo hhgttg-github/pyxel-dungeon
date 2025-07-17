@@ -5,8 +5,9 @@ from screen import screen as sc
 
 class Castle:
     def __init__(self):
-        pass
+        game = None
     def update(self):
+        print("Castle Update")
         pass
     def draw(self):
         pass
