@@ -14,6 +14,14 @@ from font import font as ft
 
 KEY_AZ = [x for x in range(pyxel.KEY_A,pyxel.KEY_Z+1)]
 KEY_09 = [x for x in range(pyxel.KEY_0,pyxel.KEY_9)]
+KEY_SR = [pyxel.KEY_SPACE,pyxel.KEY_RETURN]
+KEY_ANY = KEY_AZ + KEY_09 + KEY_SR
+
+def key_any():
+    for k in KEY_ANY:
+        if pyxel.btnp(k):
+            return(k)
+    return(False)
 
 def key_input(l):
     result=None
@@ -32,7 +40,7 @@ def key_AZ(c):
 
 def key_09():
     result = None
-    for k in KEY_01:
+    for k in KEY_09:
         if pyxel.btnp(k):
             result = k
     return(result)
@@ -52,6 +60,25 @@ TEXT_BOTTOM = TEXT_HEIGHT -1 #25
 
 TITLE_LEFT = 0
 TITLE_RIGHT = TEXT_WIDTH -1
+
+UPPER_FRAME_TOP = 1
+UPPER_FRAME_BOTTOM = 10
+CENTER_FRAME_TOP = 12
+CENTER_FRAME_BOTTOM = 19
+LOWER_FRAME_TOP = 21
+LOWER_FRAME_BOTTOM = 25
+
+def ERASE_UPPER_FRAME():
+    for y in range(UPPER_FRAME_TOP,UPPER_FRAME_BOTTOM+1):
+        fill_horizontal_line(y,0)
+
+def ERASE_CENTER_FRAME():
+    for y in range(CENTER_FRAME_TOP,CENTER_FRAME_BOTTOM+1):
+        fill_horizontal_line(y,0)
+
+def ERASE_LOWER_FRAME():
+    for y in range(LOWER_FRAME_TOP,LOWER_FRAME_BOTTOM+1):
+        fill_horizontal_line(y,0)
 
 ####------------------------------------
 

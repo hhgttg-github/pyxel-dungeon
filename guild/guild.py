@@ -1,5 +1,5 @@
 
-import os, pickle, pyxel
+import os, pickle,time, pyxel
 
 from var_and_const import var_and_const as vc
 from player import player
@@ -19,6 +19,7 @@ PARTY_MEMBER_TOP = sc.TEXT_HEIGHT-4
 ####====================================
 
 GUILD_MAX = 20
+PARTY_MAX = 4
 
 MAIN_GUILD_KEYS = [pyxel.KEY_I,                   # INSPECT
                    pyxel.KEY_C, pyxel.KEY_D,      # CREATE, DELETE
@@ -62,6 +63,29 @@ def new_player():
 
 ####====================================
 
+def add_fellow_to_party(g):
+    sc.ERASE_CENTER_FRAME()
+    if not(g.members):
+        sc.text12(4,16,"ギルドには だれも いない．．．",7)
+        time.sleep(2)
+        sc.key_any()
+        return()
+    if len(vc.party.members) == PARTY_MAX:
+        sc.text12(4,16,"いま、パーティは まんいん だ",7)
+        time.sleep(2)
+        sc.key_any()
+        sc.ERASE_CENTER_FRAME()
+        return()
+    else:
+        sc.text12(11,16,"だれ を よぶ？",7)
+        last_char = pyxel.KEY_A + len(g.members) -1
+        k = sc.key_AZ(last_char)
+        if k:
+            k=k-pyxel.KEY_A
+            vc.party.members.append(g.members[k])
+            g.members.pop(k)
+
+####====================================
 class Guild:
 
     def __init__(self):
@@ -88,7 +112,7 @@ class Guild:
         pass    
 
     def add_fellow(self):
-        print("ADD FELLOW")
+        add_fellow_to_party(self)
 
     def remove_fellow(self):
         print("REMOVE FELLOW")
