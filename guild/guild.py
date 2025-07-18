@@ -64,13 +64,18 @@ def new_player():
 ####====================================
 
 def add_fellow_to_party(g):
+    print("add_fellow_to_party")
     sc.ERASE_CENTER_FRAME()
+    print(f"player.members={vc.player.members}")
     if not(g.members):
-        sc.text12(4,16,"ギルドには だれも いない．．．",7)
+        print("ギルドむじん")
+        sc.text12(9,13,"ギルドには だれも いない．．．",7)
+        pyxel.flip()
         time.sleep(2)
         sc.key_any()
         return()
     if len(vc.party.members) == PARTY_MAX:
+        print("パーティまんいん")
         sc.text12(4,16,"いま、パーティは まんいん だ",7)
         time.sleep(2)
         sc.key_any()
@@ -112,6 +117,7 @@ class Guild:
         pass    
 
     def add_fellow(self):
+        print("ADD FELLOW TO PARTY in Guild()")
         add_fellow_to_party(self)
 
     def remove_fellow(self):
