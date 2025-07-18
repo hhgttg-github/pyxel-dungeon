@@ -2,6 +2,8 @@
 import pyxel
 from font import font as ft
 from screen import screen as sc
+from var_and_const import var_and_const as vc
+from player import player
 
 ####====================================
 
@@ -36,4 +38,7 @@ class Castle:
 ####,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 
     def draw(self):
+        pyxel.cls(0)
+        sc.title_center(0,"東ナグリット城",0)
+        player.list_party_members(vc.party)
         pass

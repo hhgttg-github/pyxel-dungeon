@@ -192,7 +192,3 @@ class Player:
         pass
 
 #####////////////////////////////////////
-
-class Camp:
-    def __init__(self):
-        pass

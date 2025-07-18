@@ -6,14 +6,35 @@ from font import font as ft
 ####====================================
 ####
 #### KEY_INPUT
+####
+#### pyxel.KEY_A=97, pyxel.KEY_Z=122
+#### ord('A')   =65, ord('Z')   =90
+#### pyxel.KEY_A = ord('A') + 32
+#### pyxel.KEY_0=ord('0')=48, pyxel.KEY_9=ord('9')=57
+
+KEY_AZ = [x for x in range(pyxel.KEY_A,pyxel.KEY_Z+1)]
+KEY_09 = [x for x in range(pyxel.KEY_0,pyxel.KEY_9)]
 
 def key_input(l):
     result=None
     for k in l:
         if pyxel.btnp(k):
             result = k
-    if result == pyxel.KEY_ESCAPE:
-        print("KEY_ESCAPE")
+    return(result)
+
+def key_AZ(c):
+    c = ord(c)
+    result = None
+    for k in KEY_AZ:
+        if pyxel.btnp(k) and (k <= c):
+            result = k
+    return(result)
+
+def key_09():
+    result = None
+    for k in KEY_01:
+        if pyxel.btnp(k):
+            result = k
     return(result)
 
 ####====================================
@@ -25,7 +46,7 @@ SCREEN_HEIGHT = 360 + SCREEN_OFFSET*2
 TEXT_WIDTH = SCREEN_WIDTH // ft.FONT12_WIDTH
 TEXT_LEFT = 0
 TEXT_RIGHT = TEXT_WIDTH -1
-TEXT_HEIGHT = SCREEN_HEIGHT // ft.FONT12_HEIGHT #0-25, 全部で26行
+TEXT_HEIGHT = SCREEN_HEIGHT // ft.FONT12_HEIGHT #0-25, 全部で26行 font12=(12x14)
 TEXT_TOP = 0
 TEXT_BOTTOM = TEXT_HEIGHT -1 #25
 
@@ -43,6 +64,7 @@ AREA_TOP = (0,0)
 AREA_GUILD_MEMBER = (1,10)
 AREA_CENTER_MENU  = (12,PARTY_MEMBER_TOP-2)
 AREA_PARTY_MEMBER = (PARTY_MEMBER_TOP, TEXT_BOTTOM)
+AREA_ABOVE_PARTY  = (1,PARTY_MEMBER_TOP-2)
 
 def fill_horizontal_line(y,c):
     pyxel.rect(0,y*ft.FONT12_HEIGHT,SCREEN_WIDTH,ft.FONT12_HEIGHT,c)
@@ -98,14 +120,17 @@ def title_color(y,c):
     fill_horizontal_line(0,c)
     
 def title_left(y,str,c):
+    title_color(y,7)
     text12(0,y,str,c)
 
 def title_center(y,str,c):
+    title_color(y,7)
     l = len(str)
     x = (TITLE_RIGHT - l) // 2
     text12(x,y,str,c)
 
 def title_right(y,str,c):
+    title_color(y,7)
     l = len(str)
     x = TITLE_RIGHT - l
     text12(x,y,str,c)
@@ -210,19 +235,35 @@ if __name__=="__main__":
     pyxel.init(SCREEN_WIDTH,SCREEN_HEIGHT)
     pyxel.cls(0)
     
-    title_color(0,2)
-    title_center(0,"ボルタック交易所",7)
+    c = 5
+    i = 0
+    for y in range(0,30):
+        text12(0,y,f"{y}",c)
+        i += 1
+        if i==10:
+            i=0
+            c += 1
+    c = 5
+    i = 0
+    for x in range(0,30):
+        text12(x,0,f"{i}",c)
+        i += 1
+        if i==10:
+            i=0
+            c += 1
+#     title_color(0,2)
+#     title_center(0,"ボルタック交易所",7)
 
-    l = ['あああ','いいい','かきくけこ','あめんぼ','あああ','いいい','かきくけこ','あかなょん','あああ','いいい','かきくけこ','あめんぼなさかなょん']
-    draw_list(l,1,alphabet=True)
-    line_horizontal(11,"- ")
-#    line_horizontal(20,"- ")
-    title_color(20,7)
-    title_left(20," #  N A M E                 J O B     S T A T U S",0)
-    l = ['あかさたなはまやらわ','いきしちにひみいりい','うくすつぬふむゆるう','えけせてねへめえれえ']
-    draw_list(l,21,number=True)
-    # line_horizontal(23,"- ")
-    # line_horizontal(24,"# ")
-    # line_horizontal(25,"あ")
+#     l = ['あああ','いいい','かきくけこ','あめんぼ','あああ','いいい','かきくけこ','あかなょん','あああ','いいい','かきくけこ','あめんぼなさかなょん']
+#     draw_list(l,1,alphabet=True)
+#     line_horizontal(11,"- ")
+# #    line_horizontal(20,"- ")
+#     title_color(20,7)
+#     title_left(20," #  N A M E                 J O B     S T A T U S",0)
+#     l = ['あかさたなはまやらわ','いきしちにひみいりい','うくすつぬふむゆるう','えけせてねへめえれえ']
+#     draw_list(l,21,number=True)
+#     # line_horizontal(23,"- ")
+#     # line_horizontal(24,"# ")
+#     # line_horizontal(25,"あ")
 
     pyxel.show()        
