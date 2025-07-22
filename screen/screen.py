@@ -24,26 +24,32 @@ def key_any():
     return(False)
 
 def key_input(l):
-    result=None
+    result=False
     for k in l:
         if pyxel.btnp(k):
             result = k
     return(result)
 
 def key_AZ(c):
-    c = ord(c)
-    result = None
+    c = ord(c) + 32
+    result = False
     for k in KEY_AZ:
         if pyxel.btnp(k) and (k <= c):
-            result = k
+            result = chr(k-32) # 返り値は chr１文字
     return(result)
 
-def key_09():
-    result = None
+def key_09(): #0-9の整数が返る
+    result = False
     for k in KEY_09:
         if pyxel.btnp(k):
-            result = k
+            result = k - ord('A')
     return(result)
+
+####====================================
+
+def select_party_member(p):
+    n=len(p.members)
+    if not(n==0):
 
 ####====================================
 
