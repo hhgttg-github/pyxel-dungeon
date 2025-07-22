@@ -3,17 +3,16 @@ from var_and_const import var_and_const as vc
 from sprite  import sprite as sp
 from font    import font as ft
 from screen  import screen as sc
-# from item    import item
-# from monster import monster
-from maze import maze
+from maze    import maze
 from guild   import guild
 from castle  import castle
 from player  import player
+<<<<<<< HEAD
 import item, monster
+=======
+>>>>>>> da54f941041b8c1eb06097b1cfd1e007cc339d7b
 
-# # from castle import castle
-# # from maze import maze
-# # from guild import guild
+####====================================
 
 class Game:
     def __init__(self):
@@ -23,35 +22,32 @@ class Game:
 #        monster.init_monster()
 
         self.world = maze.World()
-#        self.guild = guild.Guild()
         self.scene = {}
         self.scene["guild"] = guild.Guild()
+        self.scene["guild"].game = self
         self.scene["castle"] = castle.Castle()
+        self.scene["castle"].game = self
         # self.scene["maze"] = maze.Maze()
         # self.scene["camp"] = player.Camp()
 
-        self.change_scene("guild")
+        self.state = "guild"
 
-        # vc.party = player.Party()
+        vc.party = player.Party()
         # self.guild.form_party(vc.party)
         
         pyxel.run(self.update, self.draw)
 
-    def change_scene(self,state):
-        self.state = state
-#        self.scene[state].update()
-
-# ####////////////////////////////////////
+#####////////////////////////////////////
 
     def update(self):
-        print("Game Update")
         self.scene[self.state].update()
 
     def draw(self):
 #        pyxel.cls(0)
         self.scene[self.state].draw()
 
-# ####////////////////////////////////////
+#####////////////////////////////////////
 
 if __name__=='__main__':
     vc.game = Game()
+    print('out of Game')
