@@ -7,10 +7,7 @@ from maze    import maze
 from guild   import guild
 from castle  import castle
 from player  import player
-<<<<<<< HEAD
 import item, monster
-=======
->>>>>>> da54f941041b8c1eb06097b1cfd1e007cc339d7b
 
 ####====================================
 

@@ -16,6 +16,11 @@ def key_input(l):
         print("KEY_ESCAPE")
     return(result)
 
+
+####====================================
+
+def key_AZ()
+
 ####====================================
 
 SCREEN_OFFSET = 2
