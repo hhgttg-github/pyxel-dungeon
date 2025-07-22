@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 import os, pickle, pyxel
 from screen import screen as sc
+=======
+
+import os, pickle,time, pyxel
+
+>>>>>>> 02e61902e4317f6e44780b8fa8bfb2c73bf8b23d
 from var_and_const import var_and_const as vc
 from player import player
 import monster, item, maze
@@ -11,30 +17,31 @@ GUILD_FILE = "/home/kawabe/python/pyxel/pyxel-dungeon/guild/game_guild.pickle"
 #### SCREEN SECTION
 
 LIST_GUILD_MEMBER_TOP = 1
-LIST_GUILD_MENU_TOP = 12
-LIST_PARTY_MEMBER_TOP = 23
+GUILD_MAIN_MENU_TOP = 12
 
-GUILD_MAIN_MENU_TOP = sc.TEXT_HEIGHT-4
+PARTY_MEMBER_TOP = sc.TEXT_HEIGHT-4
     
 ####====================================
 
 GUILD_MAX = 20
+PARTY_MAX = 4
 
 MAIN_GUILD_KEYS = [pyxel.KEY_I,                   # INSPECT
                    pyxel.KEY_C, pyxel.KEY_D,      # CREATE, DELETE
                    pyxel.KEY_A, pyxel.KEY_R,      # ADD, REMOVE to party
                    pyxel.KEY_S, pyxel.KEY_L,      # SAVE, LOAD
-                   pyxel.KEY_X]                   # EXIT GUILD
+                   pyxel.KEY_Q]                   # EXIT GUILD
 
 ####====================================
 
 def new_player():
-    print("new_player")
-    sc.text12(8,13,"職業は？ [ESC]=キャンセル",7)
-    sc.text12(15,14,"A) 戦士",7)
-    sc.text12(15,15,"B) 盗賊",7)
-    sc.text12(15,16,"C) 魔法使い",7)
-    keys = [pyxel.KEY_A, pyxel.KEY_B,pyxel.KEY_C, pyxel.KEY_ESCAPE]
+    c_top = sc.CENTER_MENU_TOP
+    sc.clear_area(sc.AREA_CENTER_MENU)
+    sc.text12(6,c_top,"職業は？    (Q) to Cancel",7)
+    sc.text12(10,c_top+2,"A) 戦士",7)
+    sc.text12(10,c_top+3,"B) 盗賊",7)
+    sc.text12(10,c_top+4,"C) 魔法使い",7)
+    keys = [pyxel.KEY_A, pyxel.KEY_B,pyxel.KEY_C, pyxel.KEY_Q]
     result = None
     while result == None:
         pyxel.flip()
@@ -50,16 +57,45 @@ def new_player():
         case pyxel.KEY_C:
             print("job=mage")
             p.get_job("mage")
-        case _:
+        case pyxel.KEY_Q:
             p=None
     if p:
         p.name = player.random_name()
         return(p)
     else:
+        print("RETURN WITH NONE")
         return(None)
 
 ####====================================
 
+def add_fellow_to_party(g):
+    print("add_fellow_to_party")
+    sc.ERASE_CENTER_FRAME()
+    print(f"player.members={vc.player.members}")
+    if not(g.members):
+        print("ギルドむじん")
+        sc.text12(9,13,"ギルドには だれも いない．．．",7)
+        pyxel.flip()
+        time.sleep(2)
+        sc.key_any()
+        return()
+    if len(vc.party.members) == PARTY_MAX:
+        print("パーティまんいん")
+        sc.text12(4,16,"いま、パーティは まんいん だ",7)
+        time.sleep(2)
+        sc.key_any()
+        sc.ERASE_CENTER_FRAME()
+        return()
+    else:
+        sc.text12(11,16,"だれ を よぶ？",7)
+        last_char = pyxel.KEY_A + len(g.members) -1
+        k = sc.key_AZ(last_char)
+        if k:
+            k=k-pyxel.KEY_A
+            vc.party.members.append(g.members[k])
+            g.members.pop(k)
+
+####====================================
 class Guild:
 
     def __init__(self):
@@ -86,7 +122,8 @@ class Guild:
         pass    
 
     def add_fellow(self):
-        print("ADD FELLOW")
+        print("ADD FELLOW TO PARTY in Guild()")
+        add_fellow_to_party(self)
 
     def remove_fellow(self):
         print("REMOVE FELLOW")
@@ -110,15 +147,14 @@ class Guild:
         for i in self.members:
             l.append(i.name)
         sc.draw_list2(l,1,alphabet = True)
-        sc.line_horizontal(12,'-')
+        player.list_party_members(vc.party)
 
     def draw_guild_main_menu(self):
         sc.line_horizontal(GUILD_MAIN_MENU_TOP-1,"- ")
-        sc.text12( 2,GUILD_MAIN_MENU_TOP,"I)nspect,   A)dd to party,   R)emove from party",7)
-        sc.text12( 2,GUILD_MAIN_MENU_TOP+1,"C)reate Newbi,   D)elete Member",7)
-        sc.text12(18,GUILD_MAIN_MENU_TOP+2,"eX)it Guild",7)
+        sc.text12( 2,GUILD_MAIN_MENU_TOP+1,"I)nspect,   A)dd to party,   R)emove from party",7)
+        sc.text12( 2,GUILD_MAIN_MENU_TOP+3,"C)reate Newbi,   D)elete Member  (Q) to Castle",7)
 
-####////////////////////////////////////
+####,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 
     def update(self):
         k = sc.key_input(MAIN_GUILD_KEYS)
@@ -137,11 +173,11 @@ class Guild:
                 self.save()
             case pyxel.KEY_L:
                 self.load()
-            case pyxel.KEY_X:
+            case pyxel.KEY_Q:
                 print("Exit Guild")
                 self.game.state = "castle"
 
-#####////////////////////////////////////
+####,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 
     def draw(self):
         pyxel.cls(0)

@@ -42,6 +42,7 @@ class Game:
     def draw(self):
 #        pyxel.cls(0)
         self.scene[self.state].draw()
+        pyxel.flip()
 
 #####////////////////////////////////////
 
