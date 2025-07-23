@@ -14,8 +14,8 @@ from font import font as ft
 
 KEY_AZ = [x for x in range(pyxel.KEY_A,pyxel.KEY_Z+1)]
 KEY_09 = [x for x in range(pyxel.KEY_0,pyxel.KEY_9)]
-KEY_SR = [pyxel.KEY_SPACE,pyxel.KEY_RETURN]
-KEY_ANY = KEY_AZ + KEY_09 + KEY_SR
+KEY_SRE = [pyxel.KEY_SPACE,pyxel.KEY_RETURN,pyxel.KEY_ESCAPE]
+KEY_ANY = KEY_AZ + KEY_09 + KEY_SRE
 
 def key_any():
     for k in KEY_ANY:
@@ -39,17 +39,19 @@ def key_AZ(c):
 
 def key_09():
     result = False
-    for k in KEY_09:
+    for k in KEY_09+KEY_SRE:
         if pyxel.btnp(k):
-            result = k - ord('0')
+            if (k>=ord('0')) and (k<=ord('9')):
+                result = k - ord('0')
     return(result)
 
 def key_1n(n):
     result = False
     n += pyxel.KEY_0
     for k in KEY_09:
-        if pyxel.btnp(k) and (k>=pyxel.KEY_1) and (k<=n):
-            result = k - ord('0')
+        if pyxel.btnp(k):
+            if (k >= pyexel.KEY_1) and (k <= n):
+                result = k - ord('0')
     return(result)
 
 ####====================================

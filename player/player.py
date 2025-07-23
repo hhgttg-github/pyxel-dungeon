@@ -125,11 +125,11 @@ class Party:
         self.bag = []
     def add(self,p):
         self.members.append(p)
-#        self.members.append(vc.game.guild.member[id])
+        p.in_party = True
     def join_from_guild(self,guild):
-        for i in guild.members:
-            if i.in_maze:
-                self.members.append(i)
+        for p in guild.members:
+            if p.in_party:
+                self.members.append(p)
 
 #####////////////////////////////////////
     
@@ -146,7 +146,7 @@ class Party:
 
 class Player:
     def __init__(self):
-        self.in_maze = False
+        self.in_party = False
         self.name = None
         self.job = None
         self.status = []
@@ -157,7 +157,7 @@ class Player:
         self.hp_max = None
         self.equip = {"weapon":None,"armor":None,"shield":None,"others":None}
     def __repr__(self):
-        return (f"self.in_maze = {self.in_maze!r}\n"
+        return (f"self.in_party = {self.in_party!r}\n"
                 f"self.name = {self.name!r}\n"
                 f"self.job = {self.job!r}\n"
                 f"self.status = {self.status!r}\n"

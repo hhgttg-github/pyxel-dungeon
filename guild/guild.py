@@ -93,26 +93,34 @@ def add_fellow_to_party(g):
         if k:
             k=k-pyxel.KEY_A
             vc.party.members.append(g.members[k])
-            g.members.pop(k)
+            g.members[k].in_party = True
 
 ####====================================
-<<<<<<< HEAD
 
 def remove_fellow_from_partY(p):
     sc.ERASE_CENTER_FRAME()
     if len(p.members)==0:
-        sc.text12(11,16,"いま、パーティには だれもいない。",7)
+        sc.text12(11,16,"パーティには だれもいない",7)
+        pyxel.flip()
         time.sleep(2)
         sc.key_any()
         sc.ERASE_CENTER_FRAME()
         return()
     else:
-        sc.text(11,16,"パーティを はずすのは だれ？",7)
+        sc.text12(11,16,"パーティを はなれるのは だれ？",7)
+        n=len(p.memebers)
+        i=sc.key_1n(n)
+        if i:
+            rf = p.member[i-1] # remove_fellow
+            sc.text12(11,16,f"{rf.name} が ギルドにもどった")
+            rf.in_party = False
+            pyxel.flip()
+            time.sleep(2)
+            sc.key_any()
+            sc.ERASE_CENTER_FRAME()
         
 ####====================================
 
-=======
->>>>>>> origin/castle
 class Guild:
 
     def __init__(self):
