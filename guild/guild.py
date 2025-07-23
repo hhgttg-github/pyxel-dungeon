@@ -1,11 +1,5 @@
-<<<<<<< HEAD
-import os, pickle, pyxel
+import os, pickle, pyxel, time
 from screen import screen as sc
-=======
-
-import os, pickle,time, pyxel
-
->>>>>>> 02e61902e4317f6e44780b8fa8bfb2c73bf8b23d
 from var_and_const import var_and_const as vc
 from player import player
 import monster, item, maze
@@ -96,6 +90,20 @@ def add_fellow_to_party(g):
             g.members.pop(k)
 
 ####====================================
+
+def remove_fellow_from_partY(p):
+    sc.ERASE_CENTER_FRAME()
+    if len(p.members)==0:
+        sc.text12(11,16,"いま、パーティには だれもいない。",7)
+        time.sleep(2)
+        sc.key_any()
+        sc.ERASE_CENTER_FRAME()
+        return()
+    else:
+        sc.text(11,16,"パーティを はずすのは だれ？",7)
+        
+####====================================
+
 class Guild:
 
     def __init__(self):
@@ -127,6 +135,7 @@ class Guild:
 
     def remove_fellow(self):
         print("REMOVE FELLOW")
+        remove_fellow_from_party(self)
 
     def save(self):
         with open(GUILD_FILE, 'wb') as f:
@@ -183,7 +192,7 @@ class Guild:
         pyxel.cls(0)
         self.list_guild_members()
         self.draw_guild_main_menu()
-#        vc.party.draw()
+        vc.party.draw()
 
 ####////////////////////////////////////
 

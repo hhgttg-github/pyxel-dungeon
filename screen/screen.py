@@ -24,15 +24,14 @@ def key_any():
     return(False)
 
 def key_input(l):
-    result=None
     for k in l:
         if pyxel.btnp(k):
-            result = k
-    return(result)
+            return(k)
+    return(False)
 
 def key_AZ(c):
     c = ord(c)
-    result = None
+    result = False
     for k in KEY_AZ:
         if pyxel.btnp(k) and (k <= c):
             result = k
@@ -45,11 +44,7 @@ def key_09():
             result = k
     return(result)
 
-
-####====================================
-
-def key_AZ(c):
-    
+def key_
 
 ####====================================
 
