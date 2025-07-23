@@ -14,8 +14,8 @@ from font import font as ft
 
 KEY_AZ = [x for x in range(pyxel.KEY_A,pyxel.KEY_Z+1)]
 KEY_09 = [x for x in range(pyxel.KEY_0,pyxel.KEY_9)]
-KEY_SR = [pyxel.KEY_SPACE,pyxel.KEY_RETURN]
-KEY_ANY = KEY_AZ + KEY_09 + KEY_SR
+KEY_SRE = [pyxel.KEY_SPACE, pyxel.KEY_RETURN, pyxel.KEY_ESCAPE]
+KEY_ANY = KEY_AZ + KEY_09 + KEY_SRE
 
 def key_any():
     for k in KEY_ANY:
@@ -33,9 +33,10 @@ def key_input(l):
 def key_AZ(c):
     c = ord(c) + 32
     result = False
-    for k in KEY_AZ:
-        if pyxel.btnp(k) and (k <= c):
-            result = chr(k-32) # 返り値は chr１文字
+    for k in KEY_AZ + KEY_SRE:
+        if pyxel.btnp(k):
+            if not(k in KEY_SRE) and (k <= c):
+                result = chr(k-32) # 返り値は chr１文字
     return(result)
 
 def key_09(): #0-9の整数が返る
@@ -45,11 +46,26 @@ def key_09(): #0-9の整数が返る
             result = k - ord('A')
     return(result)
 
+def key_1n(n):
+    result = False
+    for k in KEY_09 + KEY_SRE:
+        if pyxl.btnp(k):
+            if k in KEY_09:
+                result = k - ord('0')
+                if (result >= 1) and (result <= n):
+                    return(result)
+    return(result)
+
+
 ####====================================
 
 def select_party_member(p):
     n=len(p.members)
     if not(n==0):
+        m = key_1n(n) - 1
+        if m:
+            return(p.members[m])
+    return(False)
 
 ####====================================
 
