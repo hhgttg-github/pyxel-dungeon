@@ -1,9 +1,9 @@
 
 import os, pickle,time, pyxel
 
-from var_and_const import var_and_const as vc
-from player import player
+import var_and_const as vc
 from screen import screen as sc
+import player
 
 GUILD_FILE = "/home/kawabe/python/pyxel/pyxel-dungeon/guild/game_guild.pickle"
 

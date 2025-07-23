@@ -1,7 +1,5 @@
 import pyxel,sys
-
-#sys.path.append('/home/kawabe/MEGA/python/pyxel/dungeon/')
-from font import font as ft
+import font as ft
 
 ####====================================
 ####
@@ -25,21 +23,25 @@ def key_any():
 
 def key_input(l):
     result=False
-    for k in l:
-        if pyxel.btnp(k):
-            result = k
-    return(result)
+    l_SRE = l + KEY_SRE
+    while True:
+        for k in l_SRE:
+            if pyxel.btnp(k):
+                if k in l:
+                    return(k)
+                else:
+                    return(False)
 
 def key_AZ(c):
-    c = ord(c) + 32
+    c = c + 32
     result = False
     while True:
         for k in KEY_AZ + KEY_SRE:
             if pyxel.btnp(k):
-                if k in KEY_SRE:
-                    return(False)
                 if (k in KEY_AZ) and (k <= c):
                     return(chr(k-32)) # 返り値は chr１文字
+                elif k in KEY_SRE:
+                    return(False)
 
 def key_09(): #0-9の整数が返る
     result = False

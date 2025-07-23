@@ -1,10 +1,10 @@
 #sys.path.append("/home/kawabe/MEGA/python/pyxel/dungeon")
 
-import sys
-import os
-import csv
-from dice import dice
-from var_and_const import var_and_const as vc
+import sys,os,csv
+
+import dice          as dc
+import var_and_const as vc
+import screen        as sc
 
 ####====================================
 

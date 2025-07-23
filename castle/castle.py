@@ -1,9 +1,9 @@
 
 import pyxel
-from font import font as ft
-from screen import screen as sc
-from var_and_const import var_and_const as vc
-from player import player
+import font as ft
+import var_and_const as vc
+import screen as sc
+import player
 
 ####====================================
 

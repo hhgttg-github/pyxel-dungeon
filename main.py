@@ -1,12 +1,12 @@
 import pyxel
-from var_and_const import var_and_const as vc
-from sprite  import sprite as sp
-from font    import font as ft
-from screen  import screen as sc
-from maze    import maze
-from guild   import guild
-from castle  import castle
-from player  import player
+import var_and_const as vc
+import sprite        as sp
+import font          as ft
+import screen        as sc
+import maze
+import guild
+import castle
+import player
 
 ####====================================
 

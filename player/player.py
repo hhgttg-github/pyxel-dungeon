@@ -1,10 +1,10 @@
 
 import random
-from dice import dice as dc
-from font import font as ft
-from screen import screen as sc
-from var_and_const import var_and_const as vc
-from maze import maze as mz
+import dice as dc
+import font as ft
+import var_and_const as vc
+import screen        as sc
+import maze          as mz
 import guild,castle
 
 ####====================================
