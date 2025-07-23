@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 import os, pickle, pyxel, time
 from screen import screen as sc
+=======
+
+import os, pickle,time, pyxel
+
+>>>>>>> origin/castle
 from var_and_const import var_and_const as vc
 from player import player
 import monster, item, maze
@@ -90,6 +96,7 @@ def add_fellow_to_party(g):
             g.members.pop(k)
 
 ####====================================
+<<<<<<< HEAD
 
 def remove_fellow_from_partY(p):
     sc.ERASE_CENTER_FRAME()
@@ -104,6 +111,8 @@ def remove_fellow_from_partY(p):
         
 ####====================================
 
+=======
+>>>>>>> origin/castle
 class Guild:
 
     def __init__(self):
