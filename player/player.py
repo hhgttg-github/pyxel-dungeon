@@ -102,6 +102,16 @@ def list_party_members(p):
 
 ####====================================
 
+def select_party_member(p):
+    n = len(p.members)
+    if not(n==0):
+        i = sc.key_1n(n)
+        return(i)
+    else:
+        return(False)
+
+####====================================
+
 class Party:
     def __init__(self):
         self.in_maze = False
