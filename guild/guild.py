@@ -66,7 +66,7 @@ def new_player():
 def add_fellow_to_party(g):
     print("add_fellow_to_party")
     sc.ERASE_CENTER_FRAME()
-    print(f"player.members={vc.player.members}")
+    print(vc.party.members)
     if not(g.members):
         print("ギルドむじん")
         sc.text12(9,13,"ギルドには だれも いない．．．",7)
@@ -83,6 +83,7 @@ def add_fellow_to_party(g):
         return()
     else:
         sc.text12(11,16,"だれ を よぶ？",7)
+        pyxel.flip()
         last_char = pyxel.KEY_A + len(g.members) -1
         k = sc.key_AZ(last_char)
         if k:
@@ -90,6 +91,15 @@ def add_fellow_to_party(g):
             vc.party.members.append(g.members[k])
             g.members.pop(k)
 
+def remove_fellow_from_party(p):
+    n = len(p.members)
+    sc.ERASE_CENTER_FRAME()
+    if n == 0:
+        sc.text12(4,16,"パーティには だれも いない",7)
+        time.sleep(2)
+        sc.key_any()
+        sc.ERASE_CENTER_FRAME()
+        
 ####====================================
 class Guild:
 
@@ -122,6 +132,7 @@ class Guild:
 
     def remove_fellow(self):
         print("REMOVE FELLOW")
+        remove_fellow_from_party(self)
 
     def save(self):
         with open(GUILD_FILE, 'wb') as f:

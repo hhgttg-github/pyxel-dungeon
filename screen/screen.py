@@ -33,11 +33,13 @@ def key_input(l):
 def key_AZ(c):
     c = ord(c) + 32
     result = False
-    for k in KEY_AZ + KEY_SRE:
-        if pyxel.btnp(k):
-            if not(k in KEY_SRE) and (k <= c):
-                result = chr(k-32) # 返り値は chr１文字
-    return(result)
+    while True:
+        for k in KEY_AZ + KEY_SRE:
+            if pyxel.btnp(k):
+                if k in KEY_SRE:
+                    return(False)
+                if (k in KEY_AZ) and (k <= c):
+                    return(chr(k-32)) # 返り値は chr１文字
 
 def key_09(): #0-9の整数が返る
     result = False
@@ -49,13 +51,12 @@ def key_09(): #0-9の整数が返る
 def key_1n(n):
     result = False
     for k in KEY_09 + KEY_SRE:
-        if pyxl.btnp(k):
+        if pyxel.btnp(k):
             if k in KEY_09:
                 result = k - ord('0')
                 if (result >= 1) and (result <= n):
                     return(result)
     return(result)
-
 
 ####====================================
 

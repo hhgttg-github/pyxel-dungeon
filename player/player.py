@@ -51,10 +51,10 @@ def job_str(j):
 
 ####------------------------------------
 
-def status_str(p):
+def status_str(pc):
     result = ""
-    if p.status:
-        for i in p.status:
+    if pc.status:
+        for i in pc.status:
             match i:
                 case "poison":
                     result += "毒"
@@ -67,7 +67,7 @@ def status_str(p):
                 case _:
                     result += "？"
     else:
-        i = p.hp / p.hp_max
+        i = pc.hp / pc.hp_max
         match i:
             case i if i<=0.25:
                 result = "じゅうしょう"
@@ -81,24 +81,24 @@ def status_str(p):
 
 ####------------------------------------
 
-def str_for_member(p):  # p -> PLAYER CLASS
-    if p:
-        return(f"{p.name:<16}" + 
-               f"{job_str(p.job):<5}" + 
-               f"{status_str(p)}")
+def str_for_member(pc):  # p -> PLAYER CLASS
+    if pc:
+        return(f"{pc.name:<16}" + 
+               f"{job_str(pc.job):<5}" + 
+               f"{status_str(pc)}")
 
 ####------------------------------------
 
-def list_party_members(p):
+def list_party_members(p): # p -> Party
     sc.line_horizontal(sc.TEXT_BOTTOM-5,'-')
-    index = 1
-    for i in range(PARTY_MAX):
-        if p.members[i]:
-            s = f"{index:2>} {str_for_member(i)}"
-        else:
-            s = f"{index:2}"
-        sc.text12(0, sc.PARTY_MEMBER_TOP+index, s, 7)
-        index += 1
+    for i in range(1,PARTY_MAX):
+        sc.text12(0,sc.PARTY_MEMBER_TOP+i,f"{i:2}",7)
+    y = 0
+    if p.members:
+        for pc in p.members:
+            s = f"{str_for_member(pc)}"
+            sc.text12(3, sc.PARTY_MEMBER_TOP+y, s, 7)
+            y += 1
 
 ####====================================
 
@@ -107,25 +107,31 @@ class Party:
         self.in_maze = False
         self.wxy = mz.INITIAL_WXY
         self.xy = mz.INITIAL_XY
-        self.members = [None for _ in range(PARTY_MAX)]
+        self.members = []
         self.scanned = [[False for _ in range(mz.MAZE_SIZE)] for _ in range(mz.WORLD_SIZE)]
                         # self.scanned[wxy][xy]の順番
         self.gold = 0
         self.key_item = []
         self.bag = []
-    def add(self,p):
-        self.members.append(p)
-#        self.members.append(vc.game.guild.member[id])
+
+    def add(self,pc):
+        self.members.append(pc)
+        pc.in_party = True
+
+    def remove(self,pc):
+        pc.in_party = False
+        self.members.pop(pc)
+
     def join_from_guild(self,guild):
-        for i in guild.members:
-            if i.in_maze:
-                self.members.append(i)
+        for pc in guild.members:
+            if pc.in_party:
+                self.members.append(pc)
 
 #####////////////////////////////////////
     
     def update(self):
-        for i in self.members:
-            i.update()
+        for pc in self.members:
+            pc.update()
 
 #####////////////////////////////////////
 
@@ -136,7 +142,7 @@ class Party:
 
 class Player:
     def __init__(self):
-        self.in_maze = False
+        self.in_party = False
         self.name = None
         self.job = None
         self.status = []
@@ -147,7 +153,7 @@ class Player:
         self.hp_max = None
         self.equip = {"weapon":None,"armor":None,"shield":None,"others":None}
     def __repr__(self):
-        return (f"self.in_maze = {self.in_maze!r}\n"
+        return (f"self.in_party = {self.in_party!r}\n"
                 f"self.name = {self.name!r}\n"
                 f"self.job = {self.job!r}\n"
                 f"self.status = {self.status!r}\n"
