@@ -99,6 +99,23 @@ def list_party_members(p): # p -> Party
             s = f"{str_for_member(pc)}"
             sc.text12(3, sc.PARTY_MEMBER_TOP+y, s, 7)
             y += 1
+    pyxel.flip()
+
+####====================================
+
+PARTY_MEMBER_KEY = [pyxel.KEY_1,pyxel.KEY_2, pyxel.KEY_3, pyxel.KEY_4]
+
+def select_party_member(p):
+    if p.members:
+        n = len(p.members)
+        vc.game.detect_key.key_list = PARTY_MEMBER_KEY[0:n]
+        k = vc.game.detect_key.key
+        if k == pyxel.KEY_ESCAPE:
+            vc.game.detect_key.reset()
+            return(vc.KEY_CANCEL)
+        if k in PARTY_MEMBER_KEY:
+            vc.game.detect_key.reset()
+            return(k - pyxel.KEY_1) #入力があれば0-3の数値を返す
 
 ####====================================
 
