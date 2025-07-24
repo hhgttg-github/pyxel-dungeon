@@ -2,6 +2,65 @@ import pyxel,sys
 import font as ft
 
 ####====================================
+####
+#### KEY_INPUT
+####
+#### pyxel.KEY_A=97, pyxel.KEY_Z=122
+#### ord('A')   =65, ord('Z')   =90
+#### pyxel.KEY_A = ord('A') + 32
+#### pyxel.KEY_0=ord('0')=48, pyxel.KEY_9=ord('9')=57
+
+KEY_AZ = [x for x in range(pyxel.KEY_A,pyxel.KEY_Z+1)]
+KEY_09 = [x for x in range(pyxel.KEY_0,pyxel.KEY_9)]
+KEY_SRE = [pyxel.KEY_SPACE, pyxel.KEY_RETURN, pyxel.KEY_ESCAPE]
+KEY_ANY = KEY_AZ + KEY_09 + KEY_SRE
+
+def key_any():
+    for k in KEY_ANY:
+        if pyxel.btnp(k):
+            return(k)
+    return(False)
+
+def key_input(l):
+    result=False
+    l_SRE = l + KEY_SRE
+    while True:
+        for k in l_SRE:
+            if pyxel.btnp(k):
+                if k in l:
+                    return(k)
+                else:
+                    return(False)
+
+def key_AZ():
+    for k in KEY_AZ:
+        if pyxel.btn(k):
+            return(k)
+    return(False)
+
+def key_09(): #0-9の整数が返る
+    result = False
+    while True:
+        if pyxel.btnp(pyxel.KEY_A):
+                result = pyxel.KEY_A
+                return(result)
+        # for k in KEY_09:
+        #     print(k)
+        #     if pyxel.btnp(k):
+#                result = k
+                return(result)
+
+def key_1n(n):
+    result = False
+    for k in KEY_09 + KEY_SRE:
+        if pyxel.btnp(k):
+            if k in KEY_09:
+                result = k - ord('0')
+                if (result >= 1) and (result <= n):
+                    return(result)
+    return(result)
+
+####====================================
 
 def select_party_member(p):
     n=len(p.members)
