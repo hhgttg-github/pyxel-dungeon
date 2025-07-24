@@ -1,3 +1,5 @@
+import pyxel
+import var_and_const as vc
 import sprite        as sp
 import font          as ft
 import screen        as sc

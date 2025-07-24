@@ -1,9 +1,7 @@
 #sys.path.append("/home/kawabe/MEGA/python/pyxel/dungeon")
-import sys
-import os
-import csv
-from dice import dice
-from var_and_const import var_and_const as vc
+import sys, os, csv
+import dice as dc
+import var_and_const as vc
 
 ####====================================
 
@@ -14,9 +12,9 @@ MONSTER_CSV_FILE = "/home/kawabe/python/pyxel/pyxel-dungeon/monster/game_monster
 def convert_csv(row):
     ID      = int(row[0])
     NAME    = row[1]
-    ATTACK  = dice.Dice(row[2])
-    DEFENCE = dice.Dice(row[3])
-    HP_MAX  = dice.Dice(row[4])
+    ATTACK  = dc.Dice(row[2])
+    DEFENCE = dc.Dice(row[3])
+    HP_MAX  = dc.Dice(row[4])
     PRICE   = int(row[5])
     EXP     = int(row[6])
     return(Monster(ID,NAME,ATTACK, DEFENCE, HP_MAX, PRICE, EXP))
