@@ -2,65 +2,6 @@ import pyxel,sys
 import font as ft
 
 ####====================================
-####
-#### KEY_INPUT
-####
-#### pyxel.KEY_A=97, pyxel.KEY_Z=122
-#### ord('A')   =65, ord('Z')   =90
-#### pyxel.KEY_A = ord('A') + 32
-#### pyxel.KEY_0=ord('0')=48, pyxel.KEY_9=ord('9')=57
-
-KEY_AZ = [x for x in range(pyxel.KEY_A,pyxel.KEY_Z+1)]
-KEY_09 = [x for x in range(pyxel.KEY_0,pyxel.KEY_9)]
-KEY_SRE = [pyxel.KEY_SPACE, pyxel.KEY_RETURN, pyxel.KEY_ESCAPE]
-KEY_ANY = KEY_AZ + KEY_09 + KEY_SRE
-
-def key_any():
-    for k in KEY_ANY:
-        if pyxel.btnp(k):
-            return(k)
-    return(False)
-
-def key_input(l):
-    result=False
-    l_SRE = l + KEY_SRE
-    while True:
-        for k in l_SRE:
-            if pyxel.btnp(k):
-                if k in l:
-                    return(k)
-                else:
-                    return(False)
-
-def key_AZ(c):
-    c = c + 32
-    result = False
-    while True:
-        for k in KEY_AZ + KEY_SRE:
-            if pyxel.btnp(k):
-                if (k in KEY_AZ) and (k <= c):
-                    return(chr(k-32)) # 返り値は chr１文字
-                elif k in KEY_SRE:
-                    return(False)
-
-def key_09(): #0-9の整数が返る
-    result = False
-    for k in KEY_09:
-        if pyxel.btnp(k):
-            result = k - ord('A')
-    return(result)
-
-def key_1n(n):
-    result = False
-    for k in KEY_09 + KEY_SRE:
-        if pyxel.btnp(k):
-            if k in KEY_09:
-                result = k - ord('0')
-                if (result >= 1) and (result <= n):
-                    return(result)
-    return(result)
-
-####====================================
 
 def select_party_member(p):
     n=len(p.members)
@@ -287,35 +228,13 @@ if __name__=="__main__":
     pyxel.init(SCREEN_WIDTH,SCREEN_HEIGHT)
     pyxel.cls(0)
     
-    c = 5
-    i = 0
-    for y in range(0,30):
-        text12(0,y,f"{y}",c)
-        i += 1
-        if i==10:
-            i=0
-            c += 1
-    c = 5
-    i = 0
-    for x in range(0,30):
-        text12(x,0,f"{i}",c)
-        i += 1
-        if i==10:
-            i=0
-            c += 1
-#     title_color(0,2)
-#     title_center(0,"ボルタック交易所",7)
+    a = None
+    while True:
+        print(a)
+        if pyxel.btnp(pyxel.KEY_A):
+            a = pyxel.KEY_A
+            print(f"a={a}")
+            break
+    print(a)
 
-#     l = ['あああ','いいい','かきくけこ','あめんぼ','あああ','いいい','かきくけこ','あかなょん','あああ','いいい','かきくけこ','あめんぼなさかなょん']
-#     draw_list(l,1,alphabet=True)
-#     line_horizontal(11,"- ")
-# #    line_horizontal(20,"- ")
-#     title_color(20,7)
-#     title_left(20," #  N A M E                 J O B     S T A T U S",0)
-#     l = ['あかさたなはまやらわ','いきしちにひみいりい','うくすつぬふむゆるう','えけせてねへめえれえ']
-#     draw_list(l,21,number=True)
-#     # line_horizontal(23,"- ")
-#     # line_horizontal(24,"# ")
-#     # line_horizontal(25,"あ")
-
-    pyxel.show()        
+#    pyxel.show()        

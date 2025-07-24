@@ -1,5 +1,3 @@
-import pyxel
-import var_and_const as vc
 import sprite        as sp
 import font          as ft
 import screen        as sc
@@ -13,7 +11,7 @@ import player
 class Game:
     def __init__(self):
         sc.screen_init()
-
+        self.detect_key = vc.Detect_key()
 #        item.init_item()
 #        monster.init_monster()
 
@@ -29,6 +27,7 @@ class Game:
         self.state = "guild"
 
         vc.party = player.Party()
+        vc.game  = self
         # self.guild.form_party(vc.party)
         
         pyxel.run(self.update, self.draw)
@@ -36,6 +35,7 @@ class Game:
 #####////////////////////////////////////
 
     def update(self):
+        self.detect_key.update()
         self.scene[self.state].update()
 
     def draw(self):
@@ -46,5 +46,5 @@ class Game:
 #####////////////////////////////////////
 
 if __name__=='__main__':
-    vc.game = Game()
+    Game()
     print('out of Game')

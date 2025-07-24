@@ -2,7 +2,7 @@
 import os, pickle,time, pyxel
 
 import var_and_const as vc
-from screen import screen as sc
+import screen        as sc
 import player
 
 GUILD_FILE = "/home/kawabe/python/pyxel/pyxel-dungeon/guild/game_guild.pickle"
@@ -14,7 +14,7 @@ GUILD_FILE = "/home/kawabe/python/pyxel/pyxel-dungeon/guild/game_guild.pickle"
 LIST_GUILD_MEMBER_TOP = 1
 GUILD_MAIN_MENU_TOP = 12
 
-PARTY_MEMBER_TOP = sc.TEXT_HEIGHT-4
+PARTY_MEMBER_TOP = sc.TEXT_HEIGHT - 4
     
 ####====================================
 
@@ -30,35 +30,38 @@ MAIN_GUILD_KEYS = [pyxel.KEY_I,                   # INSPECT
 ####====================================
 
 def new_player():
+    p = None
     c_top = sc.CENTER_MENU_TOP
     sc.clear_area(sc.AREA_CENTER_MENU)
     sc.text12(6,c_top,"職業は？    (Q) to Cancel",7)
     sc.text12(10,c_top+2,"A) 戦士",7)
     sc.text12(10,c_top+3,"B) 盗賊",7)
     sc.text12(10,c_top+4,"C) 魔法使い",7)
-    keys = [pyxel.KEY_A, pyxel.KEY_B,pyxel.KEY_C, pyxel.KEY_Q]
-    result = None
-    while result == None:
-        pyxel.flip()
-        result = sc.key_input(keys)
-    p = player.Player()
-    match result:
+    pyxel.flip()
+    vc.game.key_list = [pyxel.KEY_A, pyxel.KEY_B,pyxel.KEY_C, pyxel.KEY_Q]
+    match vc.game.key:
         case pyxel.KEY_A:
             print("job=fighter")
+            p = player.Player()
             p.get_job("fighter")
+            vc.game.key.reset()
         case pyxel.KEY_B:
             print("job=thief")
+            p=player.Player()
             p.get_job("thief")
+            vc.game.key.reset()
         case pyxel.KEY_C:
             print("job=mage")
+            p=player.Player()
             p.get_job("mage")
+            vc.game.key.reset()
         case pyxel.KEY_Q:
             p=None
+            vc.game.key.reset()
     if p:
         p.name = player.random_name()
         return(p)
     else:
-        print("RETURN WITH NONE")
         return(None)
 
 ####====================================
@@ -163,7 +166,8 @@ class Guild:
 ####,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 
     def update(self):
-        k = sc.key_input(MAIN_GUILD_KEYS)
+        vc.game.detect_key.key_list = MAIN_GUILD_KEYS
+        k = vc.game.detect_key.key
         match k:
             case pyxel.KEY_I:
                 self.inspect()
