@@ -118,7 +118,7 @@ class Player:
         self.hp = None
         self.hp_max = None
         self.equip = {"weapon":None,"armor":None,"shield":None,"others":None}
-        self.get_job(self)
+        self.get_job()
     def __repr__(self):
         return (f"self.in_party = {self.in_party!r}\n"
                 f"self.name = {self.name!r}\n"

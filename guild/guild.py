@@ -144,7 +144,6 @@ class Guild_Newbi:
             pyxel.flip()
             time.sleep(2)
             self.guild.state = "guild_top"
-            return()
         p = None
         if pyxel.btn(pyxel.KEY_A):
             p = player.Player(job = "fighter")
@@ -154,7 +153,16 @@ class Guild_Newbi:
             p = player.Player(job = "mage")
         elif pyxel.btn(pyxel.KEY_Q) or pyxel.btn(pyxel.KEY_ESCAPE):
             self.exit = True
-
+        if p:
+            if self.guild.add_guild_member(p):
+                pass
+            else:
+                sc.ERASE_CENTER_FRAME()
+                sc.text12(4,16,"ギルドまんいん のため、しんき は おことわりです")
+                pyxel.flip()
+                time.sleep(2)
+            self.guild.state = "guild_top"
+            
         #Guild_Newbiを抜けるときは、以下
         if self.exit == True:
             self.exit = False
@@ -199,11 +207,8 @@ class Guild_Add_To_Party:
         else:
             sc.text12(11,16,"だれ を パーティに よぶ？",7)
             k=vc.key_AZ()
-            if k == pyxel.KEY_ESCAPE
-
-
-
-
+            if k == pyxel.KEY_ESCAPE:
+                self.exit = True
 
 ####====================================
 
@@ -218,35 +223,49 @@ class Guild:
         self.scene = {}
         self.scene["guild_top"] = Guild_Top(self)
         self.scene["guild_newbi"] = Guild_Newbi(self)
-        self.scene["guild_add"] = Guild_Add_TO_Party(self)
+        self.scene["guild_add"] = Guild_Add_To_Party(self)
 
         if os.path.exists(GUILD_FILE):
             self.load()
-            
+
+####....................................
+
     def form_party(self):
         if self.members:
             for i in self.members:
                 if i.in_party:
                     self.party.members.append(i)
-            
+
+####....................................
+
+    def add_guild_member(self,p):
+        if len(self.members) < GUILD_MAX:
+            self.members.append(p)
+            return(True)
+        else:
+            return(False)
+
+####....................................
+
     def inspect(self):
         pass
 
-    def create_newbie(self):
-        p = new_player()
-        if p:
-            self.members.append(p)
+####....................................
 
     def delete_member(self):
-        pass    
+        pass
+
+####....................................
 
     def add_fellow(self):
-        print("ADD FELLOW TO PARTY in Guild()")
         add_fellow_to_party(self)
 
+####....................................
+
     def remove_fellow(self):
-        print("REMOVE FELLOW")
         remove_fellow_from_party(self)
+
+####....................................
 
     def save(self):
         with open(GUILD_FILE, 'wb') as f:
@@ -261,18 +280,19 @@ class Guild:
         except Exception as e:
             print(f"データの復元中にエラーが発生しました: {e}")
 
+####....................................
+
     def list_guild_members(self):
         l = []
         for i in self.members:
+            print(f"i={i} / i.name = {i.name}")
+            
             l.append(i.name)
         sc.draw_list2(l,1,alphabet = True)
 
 ####////////////////////////////////////
 
     def update(self):
-        print(f"guild.state = {self.state}")
-        if pyxel.btn(pyxel.KEY_A):
-            print("guild_update : key= pyxel.KEY_A")
         self.scene[self.state].update()
         # vc.game.detect_key.key_list = MAIN_GUILD_KEYS
         # k = vc.game.detect_key.key
