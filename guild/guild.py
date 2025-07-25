@@ -117,7 +117,7 @@ class Guild_Top:
         sc.title_center(0,"ぼうけんしゃギルド",0)
         self.guild.list_guild_members()
         self.draw_guild_top_menu()
-        self.party.list_party_members()
+        self.guild.party.list_party_members()
 
     def draw_guild_top_menu(self):
         sc.line_horizontal(GUILD_MAIN_MENU_TOP-1,"- ")
@@ -153,7 +153,7 @@ class Guild:
     def __init__(self,g):
         self.members = []
         self.game = g
-        self.party = player.Party() 
+        self.party = player.Party(self.game) 
 
         self.state = "guild_top"
         self.scene = {}
@@ -206,8 +206,6 @@ class Guild:
         for i in self.members:
             l.append(i.name)
         sc.draw_list2(l,1,alphabet = True)
-        player.list_party_members(vc.party)
-
 
 ####////////////////////////////////////
 
