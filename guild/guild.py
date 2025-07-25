@@ -104,13 +104,25 @@ class Guild_Top:
     def __init__(self,g):
         self.guild = g
         self.exit = False
+        self.state = "guild_top"
+        self.scene = {}
+        self.scene["guid_top"] = self
+        self.scene["guild_newbi"] = Guild_Newbi(self.guild)
 
     def update(self):
+        
+        if pyxel.btn(pyxel.KEY_C):
+            self.state = "guild_newbi"
+        elif pyxel.btn(pyxel.KEY_Q):
+            self.exit = True
+
         #Guild_Topを抜けるときは、以下
         if self.exit == True:
             self.exit = False
             self.guild.state = "guild_top"
             self.game.change_scene("castle")
+
+        self.scene[self.state].update()
     
     def draw(self):
         pyxel.cls(0)
@@ -244,6 +256,3 @@ if __name__=="__main__":
     print(p)
     p.get_job("fighter")
     print(p)
-
-
-
