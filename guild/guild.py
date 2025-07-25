@@ -104,16 +104,10 @@ class Guild_Top:
     def __init__(self,g):
         self.guild = g
         self.exit = False
-        self.scene = {}
-        self.scene["guild_top"] = self
-        self.scene["guild_newbi"] = Guild_Newbi(self.guild)
 
     def update(self):
-#        print(f"self.state={self.state}")
-        if pyxel.btn(pyxel.KEY_B):
-            print("guild_top, key=KEY_B")
+
         if pyxel.btn(pyxel.KEY_C):
-            print("guidl_top, key=KEY_C")
             self.guild.state = "guild_newbi"
         elif pyxel.btn(pyxel.KEY_Q):
             self.exit = True
@@ -121,9 +115,7 @@ class Guild_Top:
         #Guild_Topを抜けるときは、以下
         if self.exit == True:
             self.exit = False
-            self.guild.state = "guild_top"
-            self.game.change_scene("castle")
-        self.scene[self.guild.state].update
+            self.guild.state = "castle"
     
     def draw(self):
         pyxel.cls(0)
@@ -163,11 +155,10 @@ class Guild_Newbi:
         elif pyxel.btn(pyxel.KEY_Q) or pyxel.btn(pyxel.KEY_ESCAPE):
             self.exit = True
 
-
         #Guild_Newbiを抜けるときは、以下
         if self.exit == True:
             self.exit = False
-            self.guild.change_scene("guild_top")
+            self.guild.state = "guild_top"
     
     def draw(self):
         c_top = sc.CENTER_MENU_TOP
@@ -176,6 +167,43 @@ class Guild_Newbi:
         sc.text12(10,c_top+2,"A) 戦士",7)
         sc.text12(10,c_top+3,"B) 盗賊",7)
         sc.text12(10,c_top+4,"C) 魔法使い",7)
+
+####====================================
+
+class Guild_Add_To_Party:
+
+    def __init__(self,g):
+        self.guild = g
+        self.g_count = len(self.guild.members)
+        self.p_count = len(self.guild.party.members)
+        self.exit = False
+
+    def update(self):
+        self.g_count = len(self.guild.members)
+        self.p_count = len(self.guild.party.members)
+        if self.exit:
+            self.guild.state = "guild_top"
+
+    def draw(self):
+        sc.ERASE_CENTER_FRAME()
+        if self.g_countr==0:
+            sc.text12(9,13,"ギルドには だれも いない．．．",7)
+            pyxel.flip()
+            time.sleep(2)
+            self.exit = True
+        elif self.p_count == player.PARTY_MAX:
+            sc.text12(9,13,"パーティが まんいん だ．．．",7)
+            pyxel.flip()
+            time.sleep(2)
+            self.exit = True
+        else:
+            sc.text12(11,16,"だれ を パーティに よぶ？",7)
+            k=vc.key_AZ()
+            if k == pyxel.KEY_ESCAPE
+
+
+
+
 
 ####====================================
 
@@ -190,6 +218,7 @@ class Guild:
         self.scene = {}
         self.scene["guild_top"] = Guild_Top(self)
         self.scene["guild_newbi"] = Guild_Newbi(self)
+        self.scene["guild_add"] = Guild_Add_TO_Party(self)
 
         if os.path.exists(GUILD_FILE):
             self.load()
