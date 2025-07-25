@@ -13,7 +13,6 @@ import player
 class Game:
     def __init__(self):
         sc.screen_init()
-        self.detect_key = vc.Detect_key()
 #        item.init_item()
 #        monster.init_monster()
 
@@ -39,7 +38,6 @@ class Game:
 #####////////////////////////////////////
 
     def update(self):
-        self.detect_key.update()
         self.scene[self.state].update()
 
     def draw(self):

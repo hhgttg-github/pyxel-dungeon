@@ -104,15 +104,17 @@ class Guild_Top:
     def __init__(self,g):
         self.guild = g
         self.exit = False
-        self.state = "guild_top"
         self.scene = {}
-        self.scene["guid_top"] = self
+        self.scene["guild_top"] = self
         self.scene["guild_newbi"] = Guild_Newbi(self.guild)
 
     def update(self):
-        
+#        print(f"self.state={self.state}")
+        if pyxel.btn(pyxel.KEY_B):
+            print("guild_top, key=KEY_B")
         if pyxel.btn(pyxel.KEY_C):
-            self.state = "guild_newbi"
+            print("guidl_top, key=KEY_C")
+            self.guild.state = "guild_newbi"
         elif pyxel.btn(pyxel.KEY_Q):
             self.exit = True
 
@@ -121,8 +123,7 @@ class Guild_Top:
             self.exit = False
             self.guild.state = "guild_top"
             self.game.change_scene("castle")
-
-        self.scene[self.state].update()
+        self.scene[self.guild.state].update
     
     def draw(self):
         pyxel.cls(0)
@@ -145,6 +146,24 @@ class Guild_Newbi:
         self.exit = False
 
     def update(self):
+        if len(self.guild.members) == GUILD_MAX:
+            sc.ERASE_CENTER_FRAME()
+            sc.text12(4,16,"ギルドまんいん のため、しんき は おことわりです")
+            pyxel.flip()
+            time.sleep(2)
+            self.guild.state = "guild_top"
+            return()
+        p = None
+        if pyxel.btn(pyxel.KEY_A):
+            p = player.Player(job = "fighter")
+        elif pyxel.btn(pyxel.KEY_B):
+            p = player.Player(job = "thief")
+        elif pyxel.btn(pyxel.KEY_C):
+            p = player.Player(job = "mage")
+        elif pyxel.btn(pyxel.KEY_Q) or pyxel.btn(pyxel.KEY_ESCAPE):
+            self.exit = True
+
+
         #Guild_Newbiを抜けるときは、以下
         if self.exit == True:
             self.exit = False
@@ -222,6 +241,9 @@ class Guild:
 ####////////////////////////////////////
 
     def update(self):
+        print(f"guild.state = {self.state}")
+        if pyxel.btn(pyxel.KEY_A):
+            print("guild_update : key= pyxel.KEY_A")
         self.scene[self.state].update()
         # vc.game.detect_key.key_list = MAIN_GUILD_KEYS
         # k = vc.game.detect_key.key

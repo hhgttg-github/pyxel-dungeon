@@ -107,10 +107,10 @@ class Party:
 ####====================================
 
 class Player:
-    def __init__(self):
+    def __init__(self,job=None):
         self.in_party = False
         self.name = None
-        self.job = None
+        self.job = job
         self.status = []
         self.attack = None
         self.defence = None
@@ -118,6 +118,7 @@ class Player:
         self.hp = None
         self.hp_max = None
         self.equip = {"weapon":None,"armor":None,"shield":None,"others":None}
+        self.get_job(self)
     def __repr__(self):
         return (f"self.in_party = {self.in_party!r}\n"
                 f"self.name = {self.name!r}\n"
@@ -134,23 +135,20 @@ class Player:
                f"{self.job_str():<5}" + 
                f"{self.status_str()}")
     
-    def get_job(self,job):
-        match job:
+    def get_job(self):
+        match self.job:
             case "fighter":
-                self.job = job
                 self.attack  = dc.Dice("1d8+0")
                 self.defence = dc.Dice("1d8+0")
                 self.magic   = dc.Dice("1d4+0")
                 self.hp = self.hp_max = 12
                 # 新しいデフォルトの装備も必要
             case "thief":
-                self.job = job
                 self.attack  = dc.Dice("1d6+0")
                 self.defence = dc.Dice("1d8+0")
                 self.magic   = dc.Dice("1d4+0")
                 self.hp = self.hp_max = 8
             case "mage":
-                self.job = job
                 self.attack  = dc.Dice("1d4+0")
                 self.defence = dc.Dice("1d4+0")
                 self.magic   = dc.Dice("1d8+0")
@@ -161,7 +159,6 @@ class Player:
                 self.defence = dc.Dice("1d4+0")
                 self.magic   = dc.Dice("1d4+0")
                 self.hp = self.hp_max = 4
-        print(f"get_job({self})")
 
 ####------------------------------------
 
