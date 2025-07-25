@@ -19,10 +19,8 @@ class Game:
 
         self.world = maze.World()
         self.scene = {}
-        self.scene["guild"] = guild.Guild()
-        self.scene["guild"].game = self
-        self.scene["castle"] = castle.Castle()
-        self.scene["castle"].game = self
+        self.scene["guild"] = guild.Guild(self)
+        self.scene["castle"] = castle.Castle(self)
         # self.scene["maze"] = maze.Maze()
         # self.scene["camp"] = player.Camp()
 
@@ -34,6 +32,8 @@ class Game:
         
         pyxel.run(self.update, self.draw)
 
+    def change_scene(self,state):
+        self.state = state
 #####////////////////////////////////////
 
     def update(self):
@@ -41,7 +41,6 @@ class Game:
         self.scene[self.state].update()
 
     def draw(self):
-#        pyxel.cls(0)a
         self.scene[self.state].draw()
         pyxel.flip()
 

@@ -104,11 +104,54 @@ def remove_fellow_from_party(p):
         sc.ERASE_CENTER_FRAME()
         
 ####====================================
+
+class Guild_Top:
+
+    def draw_guild_top_menu(self):
+        sc.line_horizontal(GUILD_MAIN_MENU_TOP-1,"- ")
+        sc.text12( 2,GUILD_MAIN_MENU_TOP+1,"I)nspect,   A)dd to party,   R)emove from party",7)
+        sc.text12( 2,GUILD_MAIN_MENU_TOP+3,"C)reate Newbi,   D)elete Member  (Q) to Castle",7)
+
+    def __init__(self,g):
+        self.guild = g
+
+    def update(self):
+        pass
+    
+    def draw(self):
+        sc.title_center(0,"ぼうけんしゃギルド",0)
+        self.guild.list_guild_members()
+        self.draw_guild_top_menu()
+        self.party.list_party_members()
+
+
+####====================================
+
+class Guild_Newbi:
+
+    def __init__(self,g):
+        self.guild = g
+
+    def update(self):
+        pass
+    
+    def draw(self):
+        pass
+
+####====================================
+
 class Guild:
 
-    def __init__(self):
+    def __init__(self,g):
         self.members = []
-        self.game = None
+        self.game = g
+        self.party = 
+
+        self.state = "guild_top"
+        self.scene = {}
+        self.scene["guild_top"] = Guild_Top(self)
+        self.scene["guild_newbi"] = Guild_Newbi(self)
+
         if os.path.exists(GUILD_FILE):
             self.load()
             
@@ -151,49 +194,42 @@ class Guild:
             print(f"データの復元中にエラーが発生しました: {e}")
 
     def list_guild_members(self):
-        sc.title_center(0,"ぼうけんしゃギルド",0)
         l = []
         for i in self.members:
             l.append(i.name)
         sc.draw_list2(l,1,alphabet = True)
         player.list_party_members(vc.party)
 
-    def draw_guild_main_menu(self):
-        sc.line_horizontal(GUILD_MAIN_MENU_TOP-1,"- ")
-        sc.text12( 2,GUILD_MAIN_MENU_TOP+1,"I)nspect,   A)dd to party,   R)emove from party",7)
-        sc.text12( 2,GUILD_MAIN_MENU_TOP+3,"C)reate Newbi,   D)elete Member  (Q) to Castle",7)
 
 ####,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 
     def update(self):
-        vc.game.detect_key.key_list = MAIN_GUILD_KEYS
-        k = vc.game.detect_key.key
-        match k:
-            case pyxel.KEY_I:
-                self.inspect()
-            case pyxel.KEY_A:
-                self.add_fellow()
-            case pyxel.KEY_R:
-                self.remove_fellow()
-            case pyxel.KEY_C:
-                self.create_newbie()
-            case pyxel.KEY_D:
-                self.delete_member()
-            case pyxel.KEY_S:
-                self.save()
-            case pyxel.KEY_L:
-                self.load()
-            case pyxel.KEY_Q:
-                print("Exit Guild")
-                self.game.state = "castle"
+        self.scene[self.state].update()
+        # vc.game.detect_key.key_list = MAIN_GUILD_KEYS
+        # k = vc.game.detect_key.key
+        # match k:
+        #     case pyxel.KEY_I:
+        #         self.inspect()
+        #     case pyxel.KEY_A:
+        #         self.add_fellow()
+        #     case pyxel.KEY_R:
+        #         self.remove_fellow()
+        #     case pyxel.KEY_C:
+        #         self.create_newbie()
+        #     case pyxel.KEY_D:
+        #         self.delete_member()
+        #     case pyxel.KEY_S:
+        #         self.save()
+        #     case pyxel.KEY_L:
+        #         self.load()
+        #     case pyxel.KEY_Q:
+        #         print("Exit Guild")
+        #         self.game.state = "castle"
 
 ####,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 
     def draw(self):
-        pyxel.cls(0)
-        self.list_guild_members()
-        self.draw_guild_main_menu()
-#        vc.party.draw()
+        self.scene[self.state].draw()
 
 ####////////////////////////////////////
 

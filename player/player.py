@@ -89,18 +89,6 @@ def str_for_member(pc):  # p -> PLAYER CLASS
 
 ####------------------------------------
 
-def list_party_members(p): # p -> Party
-    sc.line_horizontal(sc.TEXT_BOTTOM-5,'-')
-    for i in range(1,PARTY_MAX):
-        sc.text12(0,sc.PARTY_MEMBER_TOP+i,f"{i:2}",7)
-    y = 0
-    if p.members:
-        for pc in p.members:
-            s = f"{str_for_member(pc)}"
-            sc.text12(3, sc.PARTY_MEMBER_TOP+y, s, 7)
-            y += 1
-    pyxel.flip()
-
 ####====================================
 
 PARTY_MEMBER_KEY = [pyxel.KEY_1,pyxel.KEY_2, pyxel.KEY_3, pyxel.KEY_4]
@@ -143,6 +131,17 @@ class Party:
         for pc in guild.members:
             if pc.in_party:
                 self.members.append(pc)
+    
+    def list_party_members(self):
+        sc.line_horizontal(sc.TEXT_BOTTOM-5,'-')
+        for i in range(1,PARTY_MAX):
+            sc.text12(0,sc.PARTY_MEMBER_TOP+i,f"{i:2}",7)
+        y = 0
+        if self.members:
+            for pc in self.members:
+                s = f"{pc.one_line}"
+                sc.text12(3, sc.PARTY_MEMBER_TOP+y, s, 7)
+            y += 1
 
 #####////////////////////////////////////
     
