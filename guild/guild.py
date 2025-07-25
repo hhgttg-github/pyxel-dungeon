@@ -107,23 +107,28 @@ def remove_fellow_from_party(p):
 
 class Guild_Top:
 
-    def draw_guild_top_menu(self):
-        sc.line_horizontal(GUILD_MAIN_MENU_TOP-1,"- ")
-        sc.text12( 2,GUILD_MAIN_MENU_TOP+1,"I)nspect,   A)dd to party,   R)emove from party",7)
-        sc.text12( 2,GUILD_MAIN_MENU_TOP+3,"C)reate Newbi,   D)elete Member  (Q) to Castle",7)
-
     def __init__(self,g):
         self.guild = g
+        self.exit = False
 
     def update(self):
-        pass
+        #Guild_Topを抜けるときは、以下
+        if self.exit == True:
+            self.exit = False
+            self.guild.state = "guild_top"
+            self.game.change_scene("castle")
     
     def draw(self):
+        pyxel.cls(0)
         sc.title_center(0,"ぼうけんしゃギルド",0)
         self.guild.list_guild_members()
         self.draw_guild_top_menu()
         self.party.list_party_members()
 
+    def draw_guild_top_menu(self):
+        sc.line_horizontal(GUILD_MAIN_MENU_TOP-1,"- ")
+        sc.text12( 2,GUILD_MAIN_MENU_TOP+1,"I)nspect,   A)dd to party,   R)emove from party",7)
+        sc.text12( 2,GUILD_MAIN_MENU_TOP+3,"C)reate Newbi,   D)elete Member  (Q) to Castle",7)
 
 ####====================================
 
@@ -145,7 +150,7 @@ class Guild:
     def __init__(self,g):
         self.members = []
         self.game = g
-        self.party = 
+        self.party = player.Party() 
 
         self.state = "guild_top"
         self.scene = {}

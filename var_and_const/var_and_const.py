@@ -38,7 +38,7 @@ class Detect_key:
         if pyxel.btn(pyxel.KEY_ESCAPE):
             self.key = pyxel.KEY_ESCAPE
         if self.key_list==None:
-            for k in KEY_09AZE
+            for k in KEY_09AZE:
                 if pyxel.btn(k):
                     self.key = k
         else:

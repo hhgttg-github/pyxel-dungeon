@@ -1,4 +1,6 @@
 
+import pyxel
+
 import random
 import dice as dc
 import font as ft
@@ -38,54 +40,7 @@ PARTY_MAX = 4
 ####
 #### SCREEN SECTION
 
-def job_str(j):
-    match j:
-        case "fighter":
-            return("せんし")
-        case "thief":
-            return("とうぞく")
-        case "mage":
-            return("じゅつし")
-        case _:
-            return("いっぱん")
 
-####------------------------------------
-
-def status_str(pc):
-    result = ""
-    if pc.status:
-        for i in pc.status:
-            match i:
-                case "poison":
-                    result += "毒"
-                case "paralyse":
-                    result += "麻"
-                case "stoned":
-                    result += "石"
-                case "dead":
-                    result = "死亡"    
-                case _:
-                    result += "？"
-    else:
-        i = pc.hp / pc.hp_max
-        match i:
-            case i if i<=0.25:
-                result = "じゅうしょう"
-            case i if i<=0.5:
-                result = "やばい"
-            case i if i<=0.9:
-                result = "ちょっと"
-            case _:
-                result = "げんき"
-    return(f"{result:<8}")
-
-####------------------------------------
-
-def str_for_member(pc):  # p -> PLAYER CLASS
-    if pc:
-        return(f"{pc.name:<16}" + 
-               f"{job_str(pc.job):<5}" + 
-               f"{status_str(pc)}")
 
 ####------------------------------------
 
@@ -139,7 +94,7 @@ class Party:
         y = 0
         if self.members:
             for pc in self.members:
-                s = f"{pc.one_line}"
+                s = f"{pc.one_string}"
                 sc.text12(3, sc.PARTY_MEMBER_TOP+y, s, 7)
             y += 1
 
@@ -152,7 +107,7 @@ class Party:
 #####////////////////////////////////////
 
     def draw(self):
-        list_party_members(self.members)
+        self.list_party_members(self.members)
 
 ####====================================
 
@@ -179,6 +134,11 @@ class Player:
                 f"self.hp = {self.hp!r}\n"
                 f"self.hp_max = {self.hp_max!r}\n"
                 f"self.equip = {self.equip!r}")
+    def one_string(self):
+        return(f"{self.name:<16}" + 
+               f"{self.job_str():<5}" + 
+               f"{self.status_str()}")
+    
     def get_job(self,job):
         match job:
             case "fighter":
@@ -208,9 +168,56 @@ class Player:
                 self.hp = self.hp_max = 4
         print(f"get_job({self})")
 
+####------------------------------------
+
+    def job_str():
+        match self.job:
+            case "fighter":
+                return("せんし")
+            case "thief":
+                return("とうぞく")
+            case "mage":
+                return("じゅつし")
+            case _:
+                return("いっぱん")
+
+####------------------------------------
+
+    def status_str():
+        result = ""
+        if self.status:
+            for i in self.status:
+                match i:
+                    case "poison":
+                        result += "毒"
+                    case "paralyse":
+                        result += "麻"
+                    case "stoned":
+                        result += "石"
+                    case "dead":
+                        result = "死亡"    
+                    case _:
+                        result += "？"
+        else:
+            i = self.hp / self.hp_max
+            match i:
+                case i if i<=0.25:
+                    result = "じゅうしょう"
+                case i if i<=0.5:
+                    result = "やばい"
+                case i if i<=0.9:
+                    result = "ちょっと"
+                case _:
+                    result = "げんき"
+        return(f"{result:<8}")
+
+
 #####////////////////////////////////////
 
     def update(self):
         pass
 
 #####////////////////////////////////////
+
+    def draw(self):
+        pass

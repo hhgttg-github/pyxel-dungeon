@@ -17,7 +17,7 @@ class Game:
 #        item.init_item()
 #        monster.init_monster()
 
-        self.world = maze.World()
+        self.world = maze.World(self)
         self.scene = {}
         self.scene["guild"] = guild.Guild(self)
         self.scene["castle"] = castle.Castle(self)
@@ -26,7 +26,9 @@ class Game:
 
         self.state = "guild"
 
-        vc.party = player.Party()
+        self.party = player.Party()
+
+        vc.party = self.party
         vc.game  = self
         # self.guild.form_party(vc.party)
         
@@ -34,6 +36,7 @@ class Game:
 
     def change_scene(self,state):
         self.state = state
+        
 #####////////////////////////////////////
 
     def update(self):

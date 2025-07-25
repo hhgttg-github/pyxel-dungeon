@@ -74,20 +74,34 @@ WORLD_CSV = "/home/kawabe/MEGA/python/pyxel/dungeon/game_wordl.csv"
 ####====================================
 
 class World():
-    def __init__(self):
-        self.mz = [Maze() for _ in range(WORLD_SIZE)]
+
+    def __init__(self,g):
+        self.game = g
+        self.mz = [Maze(self.game, self) for _ in range(WORLD_SIZE)]
         for wxy in range(WORLD_SIZE):
             wx, wy = to_2d(wxy, WORLD_WH)
             self.mz[wxy].wx = wx
             self.mz[wxy].wy = wy
             self.mz[wxy].read_map(wx,wy)
-    def update(self):
-        vc.maze = self.mz[vc.party.wxy]
 
+#####////////////////////////////////////
+
+    def update(self):
+        pass
+
+#####////////////////////////////////////
+
+    def draw(self):
+        pass
+    
 ####====================================
 
 class Maze:
-    def __init__(self):
+    def __init__(self,g,w):
+        
+        self.game = g
+        self.world = w
+
         self.wx = None
         self.wy = None
         self.left_top_x = None
@@ -95,6 +109,7 @@ class Maze:
         self.tile = [None for _ in range(MAZE_SIZE)]
         self.scanned = [False for _ in range(MAZE_SIZE)]
         self.data = [[] for _ in range(MAZE_SIZE)]
+
     def read_map(self,wx,wy):
         self.left_top_x = wx * (TILE_PIXEL * MAZE_WH)
         self.left_top_y = wy * (TILE_PIXEL * MAZE_WH)
@@ -112,6 +127,16 @@ class Maze:
             for x in range(MAZE_WH):
                 if self.scanned_p(x,y):
                     self.draw_tile(x,y)
+
+#####////////////////////////////////////
+
+    def update(self):
+        pass
+
+#####////////////////////////////////////
+
+    def draw(self):
+        pass
 
 ####------------------------------------
 
