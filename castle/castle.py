@@ -16,10 +16,10 @@ MAIN_CASTLE_KEYS = [pyxel.KEY_G,    # GUILD
 ####====================================
 
 class Castle:
-    def __init__(self):
-        self.game = None
+    def __init__(self, g):
+        self.game = g
 
-####,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+####////////////////////////////////////
 
     def update(self):
         k = sc.key_input(MAIN_CASTLE_KEYS)
@@ -35,7 +35,7 @@ class Castle:
             case pyxel.KEY_Q:
                 self.game.state = "quit"
 
-####,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+####////////////////////////////////////
 
     def draw(self):
         pyxel.cls(0)

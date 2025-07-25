@@ -26,11 +26,10 @@ class Game:
 
         self.state = "guild"
 
-        self.party = player.Party()
+        self.party = player.Party(self)
 
         vc.party = self.party
         vc.game  = self
-        # self.guild.form_party(vc.party)
         
         pyxel.run(self.update, self.draw)
 

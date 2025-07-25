@@ -9,6 +9,11 @@ import screen        as sc
 import maze          as mz
 import guild,castle
 
+
+####====================================
+
+PARTY_MAX = 4
+
 ####====================================
 
 NAME_FILE = "/home/kawabe/python/pyxel/pyxel-dungeon/player/name.csv"
@@ -32,17 +37,6 @@ def random_name():
         result = result[:-1] #最後のスペースを除いて、
         return(result[:16].title()) # 名前は最大半角16文字(全角8文字)
 
-####====================================
-
-PARTY_MAX = 4
-
-####====================================
-####
-#### SCREEN SECTION
-
-
-
-####------------------------------------
 
 ####====================================
 
@@ -63,7 +57,8 @@ def select_party_member(p):
 ####====================================
 
 class Party:
-    def __init__(self):
+    def __init__(self,g):
+        self.game = g
         self.in_maze = False
         self.wxy = mz.INITIAL_WXY
         self.xy = mz.INITIAL_XY

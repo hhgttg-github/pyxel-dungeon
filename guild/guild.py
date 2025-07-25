@@ -19,7 +19,6 @@ PARTY_MEMBER_TOP = sc.TEXT_HEIGHT - 4
 ####====================================
 
 GUILD_MAX = 20
-PARTY_MAX = 4
 
 MAIN_GUILD_KEYS = [pyxel.KEY_I,                   # INSPECT
                    pyxel.KEY_C, pyxel.KEY_D,      # CREATE, DELETE
@@ -29,14 +28,9 @@ MAIN_GUILD_KEYS = [pyxel.KEY_I,                   # INSPECT
 
 ####====================================
 
-def new_player():
+def new_player(): #改良中で放置
     p = None
-    c_top = sc.CENTER_MENU_TOP
-    sc.clear_area(sc.AREA_CENTER_MENU)
-    sc.text12(6,c_top,"職業は？    (Q) to Cancel",7)
-    sc.text12(10,c_top+2,"A) 戦士",7)
-    sc.text12(10,c_top+3,"B) 盗賊",7)
-    sc.text12(10,c_top+4,"C) 魔法使い",7)
+
     pyxel.flip()
     vc.game.key_list = [pyxel.KEY_A, pyxel.KEY_B,pyxel.KEY_C, pyxel.KEY_Q]
     match vc.game.key:
@@ -77,7 +71,7 @@ def add_fellow_to_party(g):
         time.sleep(2)
         sc.key_any()
         return()
-    if len(vc.party.members) == PARTY_MAX:
+    if len(vc.party.members) == player.PARTY_MAX:
         print("パーティまんいん")
         sc.text12(4,16,"いま、パーティは まんいん だ",7)
         time.sleep(2)
@@ -136,12 +130,21 @@ class Guild_Newbi:
 
     def __init__(self,g):
         self.guild = g
+        self.exit = False
 
     def update(self):
-        pass
+        #Guild_Newbiを抜けるときは、以下
+        if self.exit == True:
+            self.exit = False
+            self.guild.change_scene("guild_top")
     
     def draw(self):
-        pass
+        c_top = sc.CENTER_MENU_TOP
+        sc.clear_area(sc.AREA_CENTER_MENU)
+        sc.text12(6,c_top,"職業は？    (Q) to Cancel",7)
+        sc.text12(10,c_top+2,"A) 戦士",7)
+        sc.text12(10,c_top+3,"B) 盗賊",7)
+        sc.text12(10,c_top+4,"C) 魔法使い",7)
 
 ####====================================
 
@@ -160,11 +163,11 @@ class Guild:
         if os.path.exists(GUILD_FILE):
             self.load()
             
-    def form_party(self,p):
+    def form_party(self):
         if self.members:
             for i in self.members:
                 if i.in_party:
-                    p.members.append(i)
+                    self.party.members.append(i)
             
     def inspect(self):
         pass
@@ -206,7 +209,7 @@ class Guild:
         player.list_party_members(vc.party)
 
 
-####,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+####////////////////////////////////////
 
     def update(self):
         self.scene[self.state].update()
@@ -231,7 +234,7 @@ class Guild:
         #         print("Exit Guild")
         #         self.game.state = "castle"
 
-####,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+####////////////////////////////////////
 
     def draw(self):
         self.scene[self.state].draw()
