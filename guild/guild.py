@@ -140,25 +140,25 @@ class Guild_Newbi:
     def update(self):
         if len(self.guild.members) == GUILD_MAX:
             sc.ERASE_CENTER_FRAME()
-            sc.text12(4,16,"ギルドまんいん のため、しんき は おことわりです")
+            sc.text12(4,16,"ギルドまんいん のため、しんき は おことわりです",7)
             pyxel.flip()
             time.sleep(2)
             self.guild.state = "guild_top"
         p = None
-        if pyxel.btn(pyxel.KEY_A):
+        if pyxel.btnp(pyxel.KEY_A):
             p = player.Player(job = "fighter")
-        elif pyxel.btn(pyxel.KEY_B):
+        elif pyxel.btnp(pyxel.KEY_B):
             p = player.Player(job = "thief")
-        elif pyxel.btn(pyxel.KEY_C):
+        elif pyxel.btnp(pyxel.KEY_C):
             p = player.Player(job = "mage")
-        elif pyxel.btn(pyxel.KEY_Q) or pyxel.btn(pyxel.KEY_ESCAPE):
+        elif pyxel.btnp(pyxel.KEY_Q) or pyxel.btnp(pyxel.KEY_ESCAPE):
             self.exit = True
         if p:
             if self.guild.add_guild_member(p):
                 pass
             else:
                 sc.ERASE_CENTER_FRAME()
-                sc.text12(4,16,"ギルドまんいん のため、しんき は おことわりです")
+                sc.text12(4,16,"ギルドまんいん のため、しんき は おことわりです",7)
                 pyxel.flip()
                 time.sleep(2)
             self.guild.state = "guild_top"
@@ -284,10 +284,12 @@ class Guild:
 
     def list_guild_members(self):
         l = []
+        str = ""
         for i in self.members:
-            print(f"i={i} / i.name = {i.name}")
-            
-            l.append(i.name)
+            print (i)
+            #print(f"i={i} / i.name = {i.name} / i.job={i.job_str()}")
+            s = i.name + "/" + i.job_str()
+            l.append(s)
         sc.draw_list2(l,1,alphabet = True)
 
 ####////////////////////////////////////

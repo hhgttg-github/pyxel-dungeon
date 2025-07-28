@@ -109,7 +109,7 @@ class Party:
 class Player:
     def __init__(self,job=None):
         self.in_party = False
-        self.name = None
+        self.name = random_name()
         self.job = job
         self.status = []
         self.attack = None
@@ -162,20 +162,21 @@ class Player:
 
 ####------------------------------------
 
-    def job_str():
-        match self.job:
-            case "fighter":
+    def job_str(self):
+        j = self.job
+        match j:
+            case j if j == "fighter":
                 return("せんし")
-            case "thief":
+            case j if j == "thief":
                 return("とうぞく")
-            case "mage":
+            case j if j == "mage":
                 return("じゅつし")
             case _:
                 return("いっぱん")
 
 ####------------------------------------
 
-    def status_str():
+    def status_str(self):
         result = ""
         if self.status:
             for i in self.status:
