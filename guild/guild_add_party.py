@@ -1,6 +1,8 @@
+import time
 import pyxel
 import var_and_const as vc
 import screen as sc
+
 import guild as gd
 import party as pt
 import player as pl
@@ -16,7 +18,7 @@ pass
 ####====================================
 #### CLASS
 
-class Guild_Add_Party.exe: #パーティに参加する
+class Guild_Add_Party_exe: #パーティに参加する
 
     def __init__(self,g):
         self.game = g

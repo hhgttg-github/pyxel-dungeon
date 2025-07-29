@@ -2,7 +2,21 @@ import time
 import pyxel
 import var_and_const as vc
 import screen as sc
+
 import guild as gd
+import party as pt
+import player as pl
+
+####====================================
+#### VARIABLES & CONSTANT
+pass
+
+####====================================
+#### FUNCTIONS
+pass
+
+####====================================
+#### CLASS
 
 class Guild_Newbie_exe:
 
