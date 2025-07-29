@@ -56,43 +56,8 @@ def select_party_member(p):
 
 ####====================================
 
-class Party:
-    def __init__(self,g):
-        self.game = g
-        self.in_maze = False
-        self.wxy = mz.INITIAL_WXY
-        self.xy = mz.INITIAL_XY
-        self.members = []
-        self.scanned = [[False for _ in range(mz.MAZE_SIZE)] for _ in range(mz.WORLD_SIZE)]
-                        # self.scanned[wxy][xy]の順番
-        self.gold = 0
-        self.key_item = []
-        self.bag = []
 
-    def add(self,pc):
-        self.members.append(pc)
-        pc.in_party = True
-
-    def remove(self,pc):
-        pc.in_party = False
-        self.members.pop(pc)
-
-    def join_from_guild(self,guild):
-        for pc in guild.members:
-            if pc.in_party:
-                self.members.append(pc)
-    
-    def list_party_members(self):
-        sc.line_horizontal(sc.TEXT_BOTTOM-5,'-')
-        for i in range(1,PARTY_MAX):
-            sc.text12(0,sc.PARTY_MEMBER_TOP+i,f"{i:2}",7)
-        y = 0
-        if self.members:
-            for pc in self.members:
-                s = f"{pc.one_string}"
-                sc.text12(3, sc.PARTY_MEMBER_TOP+y, s, 7)
-            y += 1
-
+        
 #####////////////////////////////////////
     
     def update(self):
@@ -111,6 +76,7 @@ class Player:
         self.in_party = False
         self.name = random_name()
         self.job = job
+        self.lv = 1
         self.status = []
         self.attack = None
         self.defence = None
@@ -123,6 +89,7 @@ class Player:
         return (f"self.in_party = {self.in_party!r}\n"
                 f"self.name = {self.name!r}\n"
                 f"self.job = {self.job!r}\n"
+                f"self.lv  = {self.lv!r}\n"
                 f"self.status = {self.status!r}\n"
                 f"self.attack = {self.attack!r}\n"
                 f"self.defence = {self.defence!r}\n"

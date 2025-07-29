@@ -1,0 +1,52 @@
+import time
+import pyxel
+import var_and_const as vc
+import screen as sc
+import guild as gd
+
+class Guild_Newbie_exe:
+
+####====================================
+
+    def __init__(self,game):
+        self.game = game
+    
+####====================================
+
+    def update(self):
+        if vc.guild.check_full():
+            sc.ERASE_CENTER_FRAME()
+            sc.text12(4,15,"ギルドまんいん のため、しんき は おことわりです",7)
+            pyxel.flip()
+            time.sleep(2)
+            self.game.state = "guild_top"
+            return() #おことわりにつき、メインループに戻る
+        
+        p = None
+        if pyxel.btnp(pyxel.KEY_A):
+            p = player.Player(job = "fighter")
+        elif pyxel.btnp(pyxel.KEY_B):
+            p = player.Player(job = "thief")
+        elif pyxel.btnp(pyxel.KEY_C):
+            p = player.Player(job = "mage")
+        elif pyxel.btnp(pyxel.KEY_Q) or pyxel.btnp(pyxel.KEY_ESCAPE):
+            self.exit = True
+        if p:
+            if self.guild.add_guild_member(p):
+                pass
+            else:
+                sc.ERASE_CENTER_FRAME()
+                sc.text12(4,15,"ギルドまんいん のため、しんき は おことわりです",7)
+                pyxel.flip()
+                time.sleep(2)
+            self.guild.state = "guild_top"
+
+####====================================
+
+    def draw(self):
+        c_top = sc.CENTER_MENU_TOP
+        sc.clear_area(sc.AREA_CENTER_MENU)
+        sc.text12(6,c_top+2,"職業は？    (Q) to Cancel",7)
+        sc.text12(10,c_top+3,"A) 戦士",7)
+        sc.text12(10,c_top+4,"B) 盗賊",7)
+        sc.text12(10,c_top+5,"C) 魔法使い",7)

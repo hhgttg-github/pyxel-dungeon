@@ -9,6 +9,7 @@ game = None
 item_db    = None
 monster_db = None
 
+guild = None
 party = None
 maze = None
 
@@ -49,3 +50,15 @@ class Detect_key:
     def reset(self):
         self.key_list = None
         self.key = None
+
+detect_key = Detect_key()
+
+####====================================
+
+def access_nth(l,n):
+    if l:
+        if n <= (len(l)-1):
+            return(l[n])
+        else:
+            return(False)
+    return(False)

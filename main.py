@@ -4,9 +4,10 @@ import sprite        as sp
 import font          as ft
 import screen        as sc
 import maze
-import guild
+import guild         as gd
+import player        as pl
+import guild_top
 import castle
-import player
 
 ####====================================
 
@@ -18,15 +19,18 @@ class Game:
 
         self.world = maze.World(self)
         self.scene = {}
-        self.scene["guild"] = guild.Guild(self)
-        self.scene["castle"] = castle.Castle(self)
+        self.scene["guild_top"]   = guild_top.Guild_Top_exe(self)
+        self.scene["guild_newbi"] = guild_bewbi.Guild_Newbi.exe(self)
+        #self.scene["castle_top"] = castle.Castle_Top(self)
         # self.scene["maze"] = maze.Maze()
         # self.scene["camp"] = player.Camp()
 
-        self.state = "guild"
+        self.state = "guild_top"
 
-        self.party = player.Party(self)
-
+        self.guild = gd.Guild(self)
+        self.party = pl.Party(self)
+        
+        vc.guild = self.guild
         vc.party = self.party
         vc.game  = self
         
