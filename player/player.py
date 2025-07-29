@@ -36,32 +36,22 @@ def random_name():
         result = result[:-1] #最後のスペースを除いて、
         return(result[:14].title()) # 名前は最大半角14文字(全角7文字)
 
+####------------------------------------
 
-
-
-####====================================
-
-
-        
-#####////////////////////////////////////
-    
-    def update(self):
-        for pc in self.members:
-            pc.update()
-
-#####////////////////////////////////////
-
-    def draw(self):
-        self.list_party_members(self.members)
+def inspect_pc(pc):
+    pyxel.cls(0)
+    sc.title_center(0,f"{pc.name} {pc.job_str()}/ Level {pc.level}",0)
+    sc.text12(3,2,f"HP {pc.hp}/{pc.hp_max}")
 
 ####====================================
+#### CLASS
 
 class Player:
     def __init__(self,job=None):
         self.in_party = False
         self.name = random_name()
         self.job = job
-        self.lv = 1
+        self.level = 1
         self.status = []
         self.attack = None
         self.defence = None
@@ -74,7 +64,7 @@ class Player:
         return (f"self.in_party = {self.in_party!r}\n"
                 f"self.name = {self.name!r}\n"
                 f"self.job = {self.job!r}\n"
-                f"self.lv  = {self.lv!r}\n"
+                f"self.level  = {self.level!r}\n"
                 f"self.status = {self.status!r}\n"
                 f"self.attack = {self.attack!r}\n"
                 f"self.defence = {self.defence!r}\n"
