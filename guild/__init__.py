@@ -1,4 +1,5 @@
-from guild.guild import *
-from guild.guild_top import *
-from guild.guild_newbi import *
-from guild.guild_add_party import *
+from.import guild
+from.import guild_top
+from.import guild_newbi
+from.import guild_add_party
+from.import guild_inspect

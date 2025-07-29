@@ -3,9 +3,10 @@ import pyxel
 import var_and_const as vc
 import screen as sc
 
-import guild as gd
 import party as pt
 import player as pl
+
+import guild as gd
 
 ####====================================
 #### VARIABLES & CONSTANT
@@ -18,7 +19,7 @@ pass
 ####====================================
 #### CLASS
 
-class Guild_Newbie_exe:
+class Guild_Newbi_exe:
 
 ####====================================
 

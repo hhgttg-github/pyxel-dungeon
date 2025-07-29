@@ -2,9 +2,10 @@ import pyxel
 import var_and_const as vc
 import screen        as sc
 
-import guild as gd
 import party as pt
 import player as pl
+
+import guild as gd
 
 ####====================================
 #### CONSTANT
@@ -42,6 +43,7 @@ class Guild_Top_exe():
         elif pyxel.btn(pyxel.KEY_Q):
             print("quit_guild_top")
             print("game.sceneは変更なし。guild_topのまま")
+            #self.game.scene = "castle_top"
 
 ####====================================
 

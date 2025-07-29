@@ -4,9 +4,6 @@ import dice          as dc
 import font          as ft
 import var_and_const as vc
 import screen        as sc
-import guild, player, castle
-
-
 
 ####====================================
 

@@ -7,8 +7,6 @@ import screen        as sc
 import party         as pt
 import player        as pl
 
-import guild_top, guild_newbi,guild_add_party
-
 ####====================================
 #### VARIABLES & CONSTANT
 
@@ -32,12 +30,6 @@ class Guild:
 
         self.game = g
         self.members = []
-
-        self.state = "guild_top"
-        self.scene = {}
-        self.scene["guild_top"] = guild_top.Guild_Top(self)
-        self.scene["guild_newbi"] = guild_newbi.Guild_Newbi(self)
-        self.scene["guild_add"] = guild_add_party.Guild_Add_Party(self)
 
         if os.path.exists(GUILD_FILE):
             self.load()
@@ -115,12 +107,12 @@ class Guild:
 ####////////////////////////////////////
 
     def update(self):
-        self.scene[self.state].update()
+        pass
 
 ####////////////////////////////////////
 
     def draw(self):
-        self.scene[self.state].draw()
+        pass
 
 ####////////////////////////////////////
 

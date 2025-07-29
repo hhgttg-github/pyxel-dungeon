@@ -3,8 +3,8 @@ import var_and_const as vc
 import screen as sc
 
 import guild as gd
-import player as pl
-import maze   as mz
+import player.player as pl
+import maze.maze     as mz
 ####====================================
 #### VARIABLES & CONSTANT
 
