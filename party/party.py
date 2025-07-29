@@ -12,8 +12,27 @@ PARTY_MAX = 4
 
 ####====================================
 #### FUNCTIONS
-pass
 
+PARTY_SELECT_LIST = [None,
+                     None,
+                     [pyxel.KEY_1,pyxel.KEY_2],
+                     [pyxel.KEY_1,pyxel.KEY_2,pyxel.KEY_3],
+                     [pyxel.KEY_1,pyxel.KEY_2,pyxel.KEY_3,pyxel.KEY_4]]
+
+def select_party_member(p):
+    n=len(pt.members)
+    if n==0:
+        return(False)
+    elif n==1:
+        return(1)
+    else:
+        l=PARTY_SELECT_LIST[n] #n=2,3,4のとき
+        result=vc.detect_key(l)
+        if result:
+            return(result)
+        else:
+            return(False)
+        
 ####====================================
 #### CLASS
 

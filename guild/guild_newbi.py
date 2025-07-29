@@ -25,6 +25,7 @@ class Guild_Newbi_exe:
 
     def __init__(self,game):
         self.game = game
+        self.exit = False
     
 ####====================================
 
@@ -36,7 +37,7 @@ class Guild_Newbi_exe:
             time.sleep(2)
             self.game.state = "guild_top"
             return() #おことわりにつき、メインループに戻る
-        
+        #上記より、ギルドに空きがある前提で以下に進む。
         p = None
         if pyxel.btnp(pyxel.KEY_A):
             p = pl.Player(job = "fighter")
@@ -47,14 +48,11 @@ class Guild_Newbi_exe:
         elif pyxel.btnp(pyxel.KEY_Q) or pyxel.btnp(pyxel.KEY_ESCAPE):
             self.exit = True
         if p:
-            if self.guild.add_guild_member(p):
-                pass
-            else:
-                sc.ERASE_CENTER_FRAME()
-                sc.text12(4,15,"ギルドまんいん のため、しんき は おことわりです",7)
-                pyxel.flip()
-                time.sleep(2)
-            self.guild.state = "guild_top"
+            vc.guild.add_member(p)
+        else:
+            self.exit = True
+            self.game.state = "guild_top"
+
 
 ####====================================
 

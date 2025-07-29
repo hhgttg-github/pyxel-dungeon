@@ -34,24 +34,10 @@ def random_name():
             result += m.strip()
             result += ' '
         result = result[:-1] #最後のスペースを除いて、
-        return(result[:16].title()) # 名前は最大半角16文字(全角8文字)
+        return(result[:14].title()) # 名前は最大半角14文字(全角7文字)
 
 
-####====================================
 
-PARTY_MEMBER_KEY = [pyxel.KEY_1,pyxel.KEY_2, pyxel.KEY_3, pyxel.KEY_4]
-
-def select_party_member(p):
-    if p.members:
-        n = len(p.members)
-        vc.game.detect_key.key_list = PARTY_MEMBER_KEY[0:n]
-        k = vc.game.detect_key.key
-        if k == pyxel.KEY_ESCAPE:
-            vc.game.detect_key.reset()
-            return(vc.KEY_CANCEL)
-        if k in PARTY_MEMBER_KEY:
-            vc.game.detect_key.reset()
-            return(k - pyxel.KEY_1) #入力があれば0-3の数値を返す
 
 ####====================================
 

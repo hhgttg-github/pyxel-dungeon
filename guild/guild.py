@@ -36,13 +36,9 @@ class Guild:
 
 ####....................................
 
-    def add_guild_member(self,p):
-        if len(self.members) < GUILD_MAX:
-            self.members.append(p)
-            return(True)
-        else:
-            return(False)
-
+    def add_member(self,pc):
+        self.members.append(pc)
+            
 ####....................................
 
     def inspect(self):
