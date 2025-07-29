@@ -9,14 +9,13 @@ import screen        as sc
 import maze          as mz
 import guild,castle
 
-
 ####====================================
-
-PARTY_MAX = 4
-
-####====================================
+#### VARIABLES & CONSTANT
 
 NAME_FILE = "/home/kawabe/python/pyxel/pyxel-dungeon/player/name.csv"
+
+####====================================
+#### FUNCTIONS
 
 def random_name():
     with open(NAME_FILE,'r') as f:

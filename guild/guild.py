@@ -4,10 +4,10 @@ import os, pickle,time, pyxel
 import var_and_const as vc
 import screen        as sc
 
-import guild_top, guild_newbi,guild_add_party
+import party         as pt
 import player        as pl
 
-GUILD_FILE = "/home/kawabe/python/pyxel/pyxel-dungeon/guild/game_guild.pickle"
+import guild_top, guild_newbi,guild_add_party
 
 ####====================================
 #### VARIABLES & CONSTANT
@@ -16,6 +16,8 @@ LIST_GUILD_MEMBER_TOP = 1
 PARTY_MEMBER_TOP = sc.TEXT_HEIGHT - 4
 
 GUILD_MAX = 20
+
+GUILD_FILE = "/home/kawabe/python/pyxel/pyxel-dungeon/guild/game_guild.pickle"
 
 ####====================================
 #### FUNCTIONS
@@ -35,7 +37,7 @@ class Guild:
         self.scene = {}
         self.scene["guild_top"] = guild_top.Guild_Top(self)
         self.scene["guild_newbi"] = guild_newbi.Guild_Newbi(self)
-        self.scene["guild_add"] = Guild_Add_Party(self)
+        self.scene["guild_add"] = guild_add_party.Guild_Add_Party(self)
 
         if os.path.exists(GUILD_FILE):
             self.load()

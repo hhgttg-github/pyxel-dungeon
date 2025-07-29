@@ -1,5 +1,4 @@
-import time
-import pyxel
+import time, pyxel
 import var_and_const as vc
 import screen as sc
 

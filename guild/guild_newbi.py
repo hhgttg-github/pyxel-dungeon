@@ -38,11 +38,11 @@ class Guild_Newbie_exe:
         
         p = None
         if pyxel.btnp(pyxel.KEY_A):
-            p = player.Player(job = "fighter")
+            p = pl.Player(job = "fighter")
         elif pyxel.btnp(pyxel.KEY_B):
-            p = player.Player(job = "thief")
+            p = pl.Player(job = "thief")
         elif pyxel.btnp(pyxel.KEY_C):
-            p = player.Player(job = "mage")
+            p = pl.Player(job = "mage")
         elif pyxel.btnp(pyxel.KEY_Q) or pyxel.btnp(pyxel.KEY_ESCAPE):
             self.exit = True
         if p:

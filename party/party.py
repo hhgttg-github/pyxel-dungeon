@@ -4,10 +4,11 @@ import screen as sc
 
 import guild as gd
 import player as pl
-
+import maze   as mz
 ####====================================
 #### VARIABLES & CONSTANT
-pass
+
+PARTY_MAX = 4
 
 ####====================================
 #### FUNCTIONS

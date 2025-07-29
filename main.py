@@ -3,10 +3,13 @@ import var_and_const as vc
 import sprite        as sp
 import font          as ft
 import screen        as sc
-import maze
+import maze          as mz
+
 import guild         as gd
+import party         as pt
 import player        as pl
-import guild_top
+
+import guild_top,guild_newbi,guild_add_party
 import castle
 
 ####====================================
@@ -17,10 +20,10 @@ class Game:
 #        item.init_item()
 #        monster.init_monster()
 
-        self.world = maze.World(self)
+        self.world = mz.World(self)
         self.scene = {}
         self.scene["guild_top"]   = guild_top.Guild_Top_exe(self)
-        self.scene["guild_newbi"] = guild_bewbi.Guild_Newbi.exe(self)
+        self.scene["guild_newbi"] = guild_newbi.Guild_Newbi.exe(self)
         #self.scene["castle_top"] = castle.Castle_Top(self)
         # self.scene["maze"] = maze.Maze()
         # self.scene["camp"] = player.Camp()
