@@ -1,4 +1,4 @@
-from.import player
+from player.player import *
 # from.import guild_top
 # from.import guild_newbi
 # from.import guild_add_party

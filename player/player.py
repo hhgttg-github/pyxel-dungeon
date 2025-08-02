@@ -12,7 +12,7 @@ import guild,castle
 ####====================================
 #### VARIABLES & CONSTANT
 
-NAME_FILE = "/home/kawabe/python/pyxel/pyxel-dungeon/player/name.csv"
+NAME_FILE = "/home/kawabes/python/pyxel/pyxel-dungeon/player/name.csv"
 
 ####====================================
 #### FUNCTIONS

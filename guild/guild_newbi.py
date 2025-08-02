@@ -26,7 +26,14 @@ class Guild_Newbi_exe:
     def __init__(self,game):
         self.game = game
         self.exit = False
-    
+
+####====================================
+
+    def exit_this(self):
+        self.exit = False
+        self.game.state = "guild_top"
+        pyxel.flip()
+
 ####====================================
 
     def update(self):
@@ -39,20 +46,21 @@ class Guild_Newbi_exe:
             return() #おことわりにつき、メインループに戻る
         #上記より、ギルドに空きがある前提で以下に進む。
         p = None
-        if pyxel.btnp(pyxel.KEY_A):
+        if pyxel.btn(pyxel.KEY_A):
             p = pl.Player(job = "fighter")
-        elif pyxel.btnp(pyxel.KEY_B):
+        elif pyxel.btn(pyxel.KEY_B):
             p = pl.Player(job = "thief")
-        elif pyxel.btnp(pyxel.KEY_C):
+        elif pyxel.btn(pyxel.KEY_C):
             p = pl.Player(job = "mage")
-        elif pyxel.btnp(pyxel.KEY_Q) or pyxel.btnp(pyxel.KEY_ESCAPE):
+        elif pyxel.btn(pyxel.KEY_Q) or pyxel.btnp(pyxel.KEY_ESCAPE):
             self.exit = True
         if p:
             vc.guild.add_member(p)
-        else:
+            vc.guild.list_guild_members()
             self.exit = True
-            self.game.state = "guild_top"
 
+        if self.exit == True:
+            self.exit_this()
 
 ####====================================
 

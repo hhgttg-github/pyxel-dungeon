@@ -39,7 +39,7 @@ class Guild_Top_exe():
 
     def update(self):
         if pyxel.btn(pyxel.KEY_C):
-            self.game.scene = "guild_newbi"
+            self.game.state = "guild_newbi"
         elif pyxel.btn(pyxel.KEY_Q):
             print("quit_guild_top")
             print("game.sceneは変更なし。guild_topのまま")
@@ -55,3 +55,4 @@ class Guild_Top_exe():
         vc.party.list_party_members()
         
         draw_guild_top_menu()
+        pyxel.flip()

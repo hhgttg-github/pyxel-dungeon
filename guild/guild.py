@@ -81,7 +81,7 @@ class Guild:
         str = ""
         for i in self.members:
             #print(f"i={i} / i.name = {i.name} / i.job={i.job_str()}")
-            s = f"{i.name:<14}/{i.job_str()} {i.lv}"
+            s = f"{i.name:<14}/{i.job_str()} {i.level}"
             print(s)
             l.append(s)
         sc.draw_list2(l,1,alphabet = True)
