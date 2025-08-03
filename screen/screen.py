@@ -219,7 +219,7 @@ def draw_list(l,top=0, number=False, alphabet=False):
 ####
 
 def screen_init():
-    pyxel.init(SCREEN_WIDTH,SCREEN_HEIGHT,display_scale=2)
+    pyxel.init(SCREEN_WIDTH,SCREEN_HEIGHT,display_scale=2,fps=40)
     pyxel.cls(0)
 
 ####====================================

@@ -20,24 +20,22 @@ class Game:
 #        item.init_item()
 #        monster.init_monster()
 
-        self.world = mz.World(self)
+        # self.world = mz.World(self)
+
         self.scene = {}
-        self.scene["guild_top"]   = gd.guild_top.Guild_Top_exe(self)
-        self.scene["guild_newbi"] = gd.guild_newbi.Guild_Newbi_exe(self)
-        self.scene["guild_inspect"] = gd.guild_inspect.Guild_Inspect_exe(self)
-        #self.scene["castle_top"] = castle.Castle_Top(self)
-        # self.scene["maze"] = maze.Maze()
-        # self.scene["camp"] = player.Camp()
+        self.state = "guild"
 
-        self.state = "guild_top"
+        self.scene["guild"] = vc.guild
+        # self.scene["guild_top"] = gd.guild_top.Guild_Top_exe(self)
 
-        self.guild = gd.guild.Guild(self)
-        self.party = pt.party.Party(self)
-        
-        vc.guild = self.guild
-        vc.party = self.party
+#         #self.scene["castle_top"] = castle.Castle_Top(self)
+#         # self.scene["maze"] = maze.Maze()
+#         # self.scene["camp"] = player.Camp()
+
+
         vc.game  = self
-        
+        self.flip_counter = 0
+        self.flip_limit = 30
         pyxel.run(self.update, self.draw)
 
     def change_scene(self,state):
@@ -50,7 +48,10 @@ class Game:
 
     def draw(self):
         self.scene[self.state].draw()
-        pyxel.flip()
+        self.flip_counter += 1
+        if self.flip_counter == self.flip_limit:
+            pyxel.flip()
+            self.flip_counter = 0
 
 #####////////////////////////////////////
 

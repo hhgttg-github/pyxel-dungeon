@@ -2,13 +2,13 @@ import pyxel
 import var_and_const as vc
 import screen        as sc
 
-import party as pt
+import party  as pt
 import player as pl
 
-import guild as gd
+import guild  as gd
 
-####====================================
-#### CONSTANT
+# ####====================================
+# #### CONSTANT
 
 GUILD_TOP_MENU_TOP = 12
 
@@ -17,8 +17,8 @@ GUILD_TOP_KEYS = [pyxel.KEY_C, pyxel.KEY_D,      # CREATE, DELETE
                   pyxel.KEY_S, pyxel.KEY_L,      # SAVE, LOAD
                   pyxel.KEY_Q]                   # EXIT GUILD
 
-####====================================
-#### FUNCTIONS
+# ####====================================
+# #### FUNCTIONS
 
 def draw_guild_top_menu():
     sc.line_horizontal(GUILD_TOP_MENU_TOP-1,"- ")
@@ -32,15 +32,19 @@ class Guild_Top_exe():
 
 ####====================================
 
-    def __init__(self,game):
-        self.game = game
-    
+    def __init__(self):
+        self.exit = False
+
 ####====================================
 
     def update(self):
-        if pyxel.btn(pyxel.KEY_C):
-            self.game.state = "guild_newbi"
-        elif pyxel.btn(pyxel.KEY_Q):
+#       print(f"self.state = {self.guild.state}")
+#       print(f"self.scene[self.state] = {self.scene[self.guild.state]}")
+        if pyxel.btnp(pyxel.KEY_C):
+            vc.guild.state = "guild_newbi"
+        elif pyxel.btnp(pyxel.KEY_I):
+            vc.guild.state = "guild_inspect"
+        elif pyxel.btnp(pyxel.KEY_Q):
             print("quit_guild_top")
             print("game.sceneは変更なし。guild_topのまま")
             #self.game.scene = "castle_top"
@@ -55,4 +59,3 @@ class Guild_Top_exe():
         vc.party.list_party_members()
         
         draw_guild_top_menu()
-        pyxel.flip()

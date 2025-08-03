@@ -7,6 +7,8 @@ import screen        as sc
 import party         as pt
 import player        as pl
 
+import guild         as gd
+
 ####====================================
 #### VARIABLES & CONSTANT
 
@@ -26,10 +28,16 @@ pass
 
 class Guild:
 
-    def __init__(self,g):
+    def __init__(self):
 
-        self.game = g
         self.members = []
+
+        self.scene = {}
+        self.state = "guild_top"
+        
+        self.scene["guild_top"] = gd.guild_top.Guild_Top_exe()
+        self.scene["guild_newbi"] = gd.guild_newbi.Guild_Newbi_exe()
+        # self.scene["guild_inspect"] = gd.guild_inspect.Guild_Inspect_exe(self.game)
 
         if os.path.exists(GUILD_FILE):
             self.load()
@@ -82,7 +90,6 @@ class Guild:
         for i in self.members:
             #print(f"i={i} / i.name = {i.name} / i.job={i.job_str()}")
             s = f"{i.name:<14}/{i.job_str()} {i.level}"
-            print(s)
             l.append(s)
         sc.draw_list2(l,1,alphabet = True)
 
@@ -103,12 +110,12 @@ class Guild:
 ####////////////////////////////////////
 
     def update(self):
-        pass
+        self.scene[self.state].update()
 
 ####////////////////////////////////////
 
     def draw(self):
-        pass
+        self.scene[self.state].draw()
 
 ####////////////////////////////////////
 

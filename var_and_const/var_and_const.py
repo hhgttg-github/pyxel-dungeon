@@ -1,6 +1,9 @@
 
 import pyxel
 
+import guild as gd
+import party.party as pt
+
 ####===================================
 #### VARIABLES
 
@@ -9,8 +12,8 @@ game = None
 item_db    = None
 monster_db = None
 
-guild = None
-party = None
+guild = gd.guild.Guild()
+party = pt.Party()
 maze = None
 
 ####====================================
@@ -47,3 +50,6 @@ def access_nth(l,n):
         else:
             return(False)
     return(False)
+
+####====================================
+#### FUNCTIONS

@@ -38,9 +38,7 @@ def select_party_member(p):
 
 class Party:
 
-    def __init__(self,g):
-        
-        self.game = g
+    def __init__(self):
 
         self.in_maze = False
         self.wxy = mz.INITIAL_WXY
