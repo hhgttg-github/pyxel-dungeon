@@ -33,6 +33,7 @@ KEY_AZ = [x for x in range(pyxel.KEY_A,pyxel.KEY_Z+1)]
 KEY_09 = [x for x in range(pyxel.KEY_0,pyxel.KEY_9)]
 KEY_SRE = [pyxel.KEY_SPACE, pyxel.KEY_RETURN, pyxel.KEY_ESCAPE]
 KEY_09AZE = KEY_09 + KEY_AZ + [pyxel.KEY_ESCAPE]
+KEY_ANY = KEY_AZ + KEY_09 + KEY_SRE
 
 def detect_key(l):
     if l:

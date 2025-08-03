@@ -19,15 +19,17 @@ class Guild_Inspect_exe:
 
 ####------------------------------------
 
-    def __init__(self,game):
-        self.game = game
+    def __init__(self):
+        self.exit = False
     
 ####====================================
 
     def update(self):
-        pass
+
 
 ####====================================
 
     def draw(self):
-        pass
+        c_top = sc.CENTER_MENU_TOP
+        sc.clear_area(sc.AREA_CENTER_MENU)
+        sc.text12(6,c_top+5,"誰を確認しますか？    (X) to Exit",7)

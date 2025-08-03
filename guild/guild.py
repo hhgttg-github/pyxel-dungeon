@@ -21,7 +21,21 @@ GUILD_FILE = "/home/kawabe/python/pyxel/pyxel-dungeon/guild/game_guild.pickle"
 
 ####====================================
 #### FUNCTIONS
-pass
+
+def select_guild_members(g):
+    if g.members:
+        k = vc.detect_key(vc.KEY_AZ)
+        if k == pyxel.KEY_X:
+            return(False)
+        else:
+            last_of_guild = len(g.members) - 1
+            i = k - pyxel.KEY_A
+            if i <= last_of_guild:
+                return(i)
+    return(False)
+
+
+
 
 ####====================================
 #### CLASS
@@ -37,7 +51,7 @@ class Guild:
         
         self.scene["guild_top"] = gd.guild_top.Guild_Top_exe()
         self.scene["guild_newbi"] = gd.guild_newbi.Guild_Newbi_exe()
-        # self.scene["guild_inspect"] = gd.guild_inspect.Guild_Inspect_exe(self.game)
+        self.scene["guild_inspect"] = gd.guild_inspect.Guild_Inspect_exe()
 
         if os.path.exists(GUILD_FILE):
             self.load()

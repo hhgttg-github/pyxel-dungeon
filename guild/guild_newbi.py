@@ -50,7 +50,7 @@ class Guild_Newbi_exe:
             p = pl.Player(job = "thief")
         elif pyxel.btnp(pyxel.KEY_C):
             p = pl.Player(job = "mage")
-        elif pyxel.btnp(pyxel.KEY_Q) or pyxel.btnp(pyxel.KEY_ESCAPE):
+        elif pyxel.btnp(pyxel.KEY_X) or pyxel.btnp(pyxel.KEY_ESCAPE):
             self.exit = True
         if p:
             vc.guild.add_member(p)
@@ -65,7 +65,7 @@ class Guild_Newbi_exe:
     def draw(self):
         c_top = sc.CENTER_MENU_TOP
         sc.clear_area(sc.AREA_CENTER_MENU)
-        sc.text12(6,c_top+2,"職業は？    (Q) to Cancel",7)
+        sc.text12(6,c_top+2,"職業は？    (X) to Exit",7)
         sc.text12(10,c_top+3,"A) 戦士",7)
         sc.text12(10,c_top+4,"B) 盗賊",7)
         sc.text12(10,c_top+5,"C) 魔法使い",7)
