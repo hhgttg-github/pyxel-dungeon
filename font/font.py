@@ -2,8 +2,8 @@
 import pyxel
 
 # um10=10x10pixel, um12=12x12pyxel
-um10 = pyxel.Font("/home/kawabes/python/pyxel/font/umplus_j10r.bdf")
-um12 = pyxel.Font("/home/kawabes/python/pyxel/font/umplus_j12r.bdf")
+um10 = pyxel.Font("/home/kawabe/python/pyxel/pyxel-dungeon/font/umplus_j10r.bdf")
+um12 = pyxel.Font("/home/kawabe/python/pyxel/pyxel-dungeon/font/umplus_j12r.bdf")
 
 FONT_SPACING = 2
 FONT10_WIDTH = 10
