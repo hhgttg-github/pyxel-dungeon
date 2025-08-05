@@ -26,11 +26,9 @@ class Game:
         self.state = "guild"
 
         self.scene["guild"] = vc.guild
-        # self.scene["guild_top"] = gd.guild_top.Guild_Top_exe(self)
-
-#         #self.scene["castle_top"] = castle.Castle_Top(self)
-#         # self.scene["maze"] = maze.Maze()
-#         # self.scene["camp"] = player.Camp()
+#         #self.scene["castle_top"] = castle.Castle_Top_exe()
+#         # self.scene["maze"] = maze.maze.Maze_Top_exe()
+#         # self.scene["camp"] = player.Camp_Top_exe()
 
 
         vc.game  = self

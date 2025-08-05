@@ -21,8 +21,8 @@ maze = None
 #### KEY_INPUT
 ####
 #### pyxel.KEY_A=97, pyxel.KEY_Z=122
-#### ord('A')   =65, ord('Z')   =90
-#### pyxel.KEY_A = ord('A') + 32
+#### ord('a')   =97, ord('z')   =122
+#### pyxel.KEY_A = ord('a')
 #### pyxel.KEY_0=ord('0')=48, pyxel.KEY_9=ord('9')=57
 
 KEY_CANCEL = -1
@@ -36,12 +36,12 @@ KEY_09AZE = KEY_09 + KEY_AZ + [pyxel.KEY_ESCAPE]
 KEY_ANY = KEY_AZ + KEY_09 + KEY_SRE
 
 def detect_key(l):
-    if l:
-        result=list(filter(lambda x:pyxel.btnp(x), l))
-        if True in result:
-            return(l.index(True))
-        return(False)
-
+    result=list(filter(lambda x:pyxel.btnp(x), l))
+    if result:
+        print(f"result={result[0]}")
+        return(result[0])
+    return(False)
+        
 ####====================================
 
 def access_nth(l,n):

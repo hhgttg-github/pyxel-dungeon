@@ -13,6 +13,8 @@ import guild         as gd
 #### VARIABLES & CONSTANT
 
 LIST_GUILD_MEMBER_TOP = 1
+LIST_GUILD_MEMBER_BOTTOM = 10
+
 PARTY_MEMBER_TOP = sc.TEXT_HEIGHT - 4
 
 GUILD_MAX = 20
@@ -63,11 +65,6 @@ class Guild:
             
 ####....................................
 
-    def inspect(self):
-        pass
-
-####....................................
-
     def delete_member(self):
         pass
 
@@ -106,6 +103,7 @@ class Guild:
             s = f"{i.name:<14}/{i.job_str()} {i.level}"
             l.append(s)
         sc.draw_list2(l,1,alphabet = True)
+        sc.line_horizontal(LIST_GUILD_MEMBER_BOTTOM+1,"- ")
 
 ####....................................
 

@@ -1,4 +1,5 @@
-import pyxel
+import time,pyxel
+
 import var_and_const as vc
 import screen as sc
 import guild as gd
@@ -20,16 +21,44 @@ class Guild_Inspect_exe:
 ####------------------------------------
 
     def __init__(self):
-        self.exit = False
+        self.on_screen_member = False
     
 ####====================================
 
     def update(self):
-        pass
+        k = vc.detect_key(vc.KEY_AZ)
+        if k:
+            if k == pyxel.KEY_X:
+                if self.on_screen_member:
+                    self.on_screen_member = False
+                    vc.guild.state = "guild_inspect"
+                    return()
+                vc.guild.state = "guild_top"              
+            else:
+                i = k - ord('a')
+                count_members = len(vc.guild.members) - 1
+                if i <= count_members:
+                    self.on_screen_member = vc.guild.members[i]
+
 
 ####====================================
 
     def draw(self):
-        c_top = sc.CENTER_MENU_TOP
-        sc.clear_area(sc.AREA_CENTER_MENU)
-        sc.text12(6,c_top+5,"誰を確認しますか？    (X) to Exit",7)
+        if self.on_screen_member:
+            pl.inspect_pc(self.on_screen_member)
+            sc.text12(12,sc.TEXT_BOTTOM,"(X) to Exit",7)
+        else:
+            pyxel.cls(0)
+            sc.title_center(0,"ぼうけんしゃギルド",0)
+            vc.guild.list_guild_members()
+            vc.party.list_party_members()
+            c_top = sc.CENTER_MENU_TOP
+            sc.clear_area(sc.AREA_CENTER_MENU)
+            if len(vc.guild.members) == 0:
+                sc.text12(6,c_top+2,"ギルドメンバーは だれも いません",7)
+                pyxel.flip()
+                time.sleep(1)
+                vc.guild.state = 'guild_top'
+            else:
+                sc.text12(6,c_top+2,"誰を確認しますか？    (X) to Exit",7)
+        

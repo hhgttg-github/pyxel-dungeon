@@ -41,7 +41,7 @@ def random_name():
 def inspect_pc(pc):
     pyxel.cls(0)
     sc.title_center(0,f"{pc.name} {pc.job_str()}/ Level {pc.level}",0)
-    sc.text12(3,2,f"HP {pc.hp}/{pc.hp_max}")
+    sc.text12(3,2,f"HP {pc.hp}/{pc.hp_max}",7)
 
 ####====================================
 #### CLASS
