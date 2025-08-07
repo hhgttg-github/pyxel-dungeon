@@ -44,17 +44,18 @@ class Guild_Inspect_exe:
 ####====================================
 
     def draw(self):
+        pyxel.cls(0)
+        sc.title_center(0,"ぼうけんしゃギルド",0)
         if self.on_screen_member:
             pl.inspect_pc(self.on_screen_member)
-            sc.text12(12,sc.TEXT_BOTTOM,"(X) to Exit",7)
+            sc.text12(12,sc.TEXT_BOTTOM-1,"(X) to Exit",7)
+            pyxel.flip()
         else:
-            pyxel.cls(0)
-            sc.title_center(0,"ぼうけんしゃギルド",0)
             vc.guild.list_guild_members()
             vc.party.list_party_members()
             c_top = sc.CENTER_MENU_TOP
             sc.clear_area(sc.AREA_CENTER_MENU)
-            if len(vc.guild.members) == 0:
+            if vc.guild.check_empty():
                 sc.text12(6,c_top+2,"ギルドメンバーは だれも いません",7)
                 pyxel.flip()
                 time.sleep(1)

@@ -140,30 +140,31 @@ def max_of_list(l):
 
 #---------------------------------------
 
-def draw_list1(l,top,left,number=False,alphabet=False):
+def draw_list1(l,top,left,number=False,alphabet=False, color_list=[]):
+    x = left
     y = top
+    if color_list:
+        c = (x for x in color_list)
+    else:
+        c = (7 for _ in l)
     if alphabet:
-        x = left
         id = 'A'
     elif number:
-        x = left
         id = 1
-    else:
-        x = left
     for i in l:
         if alphabet:
-            text12(x,y,id+" "+i,7)
+            text12(x,y,id+" "+i,next(c))
             id = chr(ord(id) + 1)
         elif number:
-            text12(x,y,f"{id:>{2}d} "+i,7)
+            text12(x,y,f"{id:>{2}d} "+i,next(c))
             id += 1
         else:
-            text12(x,y,i,7)
+            text12(x,y,i,next(c))
         y += 1
 
 #---------------------------------------
 
-def draw_list2(l,top,number=False,alphabet=False):
+def draw_list2(l,top,number=False,alphabet=False, color_list=[]):
     """項目はひとつ12文字以内におさめること"""
     COL_WIDTH = TEXT_WIDTH // 2
     if alphabet:
@@ -174,32 +175,36 @@ def draw_list2(l,top,number=False,alphabet=False):
     left_l  = l[0:10]
     right_l = l[10:]
     y = top
+    if color_list:
+        c = (x for x in color_list)
+    else:
+        c = (7 for _ in l)
     for i in left_l:
         if alphabet:
-            text12(x,y,id+" "+i,7)
+            text12(x,y,id+" "+i,next(c))
             id = chr(ord(id) + 1)
         elif number:
-            text12(x,y,f"{id:>{2}d} "+i,7)
+            text12(x,y,f"{id:>{2}d} "+i,next(c))
             id += 1
         else:
-            text12(x,y,i,7)
+            text12(x,y,i,next(c))
         y += 1
     x = 16 # COL_WIDTH+1 右列
     y = top
     for i in right_l:
         if alphabet:
-            text12(x,y,id+" "+i,7)
+            text12(x,y,id+" "+i,next(c))
             id = chr(ord(id) + 1)
         elif number:
-            text12(x,y,f"{id:>{2}d} "+i,7)
+            text12(x,y,f"{id:>{2}d} "+i,next(c))
             id += 1
         else:
-            text12(x,y,i,7)
+            text12(x,y,i,next(c))
         y += 1
 
 #---------------------------------------
 
-def draw_list(l,top=0, number=False, alphabet=False):
+def draw_list(l,top=0, number=False, alphabet=False, color_list=[]):
     """lは文字列のリスト。len(l)が10以下なら1列、20以下なら2列
     それ以上のときはエラーとなる。(半角文字問題は先送り)"""
     n = len(l)
@@ -207,9 +212,9 @@ def draw_list(l,top=0, number=False, alphabet=False):
     match n:
         case n if 1 < n <= 10:
             left_margin = (TEXT_WIDTH - max_of_l) // 2
-            draw_list1(l,top,left_margin,number,alphabet)
+            draw_list1(l,top,left_margin,number,alphabet,color_list)
         case n if n <= 20:
-            draw_list2(l,top,number,alphabet)
+            draw_list2(l,top,number,alphabet,color_list)
         case captured:
             text12(5,15,"リストが0以下、または20を超えています",7)
     

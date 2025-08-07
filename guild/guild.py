@@ -24,20 +24,19 @@ GUILD_FILE = "/home/kawabe/python/pyxel/pyxel-dungeon/guild/game_guild.pickle"
 ####====================================
 #### FUNCTIONS
 
-def select_guild_members(g):
-    if g.members:
-        k = vc.detect_key(vc.KEY_AZ)
-        if k == pyxel.KEY_X:
-            return(False)
-        else:
-            last_of_guild = len(g.members) - 1
-            i = k - pyxel.KEY_A
-            if i <= last_of_guild:
-                return(i)
-    return(False)
-
-
-
+# def select_guild_members(g):
+#     print("==================================================select guild members")
+#     if g.members:
+#         k = vc.detect_key(vc.KEY_AZ)
+#         print(f"k = {k}")
+#         if k == pyxel.KEY_X:
+#             return(False)
+#         else:
+#             last_of_guild = len(g.members) - 1
+#             i = k - ord('a')
+#             if i <= last_of_guild:
+#                 return(i)
+#     return(False)
 
 ####====================================
 #### CLASS
@@ -54,9 +53,24 @@ class Guild:
         self.scene["guild_top"] = gd.guild_top.Guild_Top_exe()
         self.scene["guild_newbi"] = gd.guild_newbi.Guild_Newbi_exe()
         self.scene["guild_inspect"] = gd.guild_inspect.Guild_Inspect_exe()
-
+        self.scene["guild_add_party"] = gd.guild_add_party.Guild_Add_Party_exe()
         if os.path.exists(GUILD_FILE):
             self.load()
+
+####====================================
+
+    def select_guild_members(self):
+        # ! 0番目を選んだとき「１」が返り値。
+        # members[i] -> i+1が返り値(0を返すとFalseと区別できない)
+        # それ以外は : False
+        if self.members:
+            k = vc.detect_key(vc.KEY_AZ)
+            if k in vc.KEY_AZ:
+                i = k-ord('a')
+                last_of_guild = len(self.members)
+                if i <= last_of_guild:
+                    return(i+1)
+        return(False)
 
 ####....................................
 
@@ -97,12 +111,16 @@ class Guild:
 
     def list_guild_members(self):
         l = []
+        c_l = []
         str = ""
         for i in self.members:
-            #print(f"i={i} / i.name = {i.name} / i.job={i.job_str()}")
             s = f"{i.name:<14}/{i.job_str()} {i.level}"
             l.append(s)
-        sc.draw_list2(l,1,alphabet = True)
+            if i.in_party:
+                c_l.append(13)
+            else:
+                c_l.append(7)
+        sc.draw_list2(l,1,alphabet = True, color_list=c_l)
         sc.line_horizontal(LIST_GUILD_MEMBER_BOTTOM+1,"- ")
 
 ####....................................

@@ -44,6 +44,8 @@ class Guild_Top_exe():
             vc.guild.state = "guild_newbi"
         elif pyxel.btnp(pyxel.KEY_I):
             vc.guild.state = "guild_inspect"
+        elif pyxel.btnp(pyxel.KEY_A):
+            vc.guild.state = "guild_add_party"
         elif pyxel.btnp(pyxel.KEY_X):
             print("quit_guild_top")
             print("game.sceneは変更なし。guild_topのまま")

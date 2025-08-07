@@ -2,6 +2,7 @@ from guild.guild import Guild
 from guild.guild_top import Guild_Top_exe
 from guild.guild_newbi import Guild_Newbi_exe
 from guild.guild_inspect import Guild_Inspect_exe
+from guild.guild_add_party import Guild_Add_Party_exe
 
 ####====================================
 #### CONSTANT

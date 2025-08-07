@@ -50,30 +50,32 @@ class Party:
         self.key_item = []
         self.bag = []
 
+####====================================
+
     def add(self,pc):
         self.members.append(pc)
         pc.in_party = True
+
+####====================================
 
     def remove(self,pc):
         pc.in_party = False
         self.members.pop(pc)
 
-    def join_from_guild(self,guild):
-        for pc in guild.members:
-            if pc.in_party:
-                self.members.append(pc)
-    
+####====================================
+
     def list_party_members(self):
-        sc.line_horizontal(sc.TEXT_BOTTOM-5,'-')
-        for i in range(1,PARTY_MAX):
+        sc.line_horizontal(sc.PARTY_MEMBER_TOP,'-')
+        for i in range(1,PARTY_MAX+1):
             sc.text12(0,sc.PARTY_MEMBER_TOP+i,f"{i:2}",7)
         y = 0
         if self.members:
             for pc in self.members:
-                s = f"{pc.one_string}"
-                sc.text12(3, sc.PARTY_MEMBER_TOP+y, s, 7)
+                sc.text12(3, sc.PARTY_MEMBER_TOP+y+1, f"{pc.one_string()}", 7)
             y += 1
-        
+
+####====================================
+
     def check_full(self):
         if len(self.members) >= PARTY_MAX:
             return(True)

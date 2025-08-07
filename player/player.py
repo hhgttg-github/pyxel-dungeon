@@ -38,20 +38,37 @@ def random_name():
 
 ####------------------------------------
 
+LT_COLUM = 6
+RT_COLUM = 18
+
 def inspect_pc(pc):
-    pyxel.cls(0)
-    sc.title_center(0,f"{pc.name} {pc.job_str()}/ Level {pc.level}",0)
-    sc.text12(3,2,f"HP {pc.hp}/{pc.hp_max}",7)
+    sc.text12(LT_COLUM-2,2,f"{pc.name:15}  Level {pc.level:<3}  {pc.job_str()}",7)
+
+    sc.text12(LT_COLUM-1,4,f"HP {pc.hp:<3} / {pc.hp_max:<3}",7)
+    sc.text12(LT_COLUM,6,f" Attack: {pc.attack}",7)
+    sc.text12(LT_COLUM,7,f"Defence: {pc.defence}",7)
+    sc.text12(LT_COLUM,8,f"  Magic: {pc.magic}",7)
+    sc.text12(RT_COLUM,4,f"Exp:{pc.exp}",7)
+    str = pc.equip["weapon"]
+    sc.text12(RT_COLUM,7,f"Weapon: {str}",7)
+    str = pc.equip["armor"]
+    sc.text12(RT_COLUM,8,f" Armor:{str}",7)
+    str = pc.equip["shield"]
+    sc.text12(RT_COLUM,9,f"Shield:{str}",7)
+    str = pc.equip["others"]
+    sc.text12(RT_COLUM,10,f"Others:{str}",7)
 
 ####====================================
 #### CLASS
 
 class Player:
+
     def __init__(self,job=None):
         self.in_party = False
         self.name = random_name()
         self.job = job
         self.level = 1
+        self.exp = 0
         self.status = []
         self.attack = None
         self.defence = None
@@ -60,11 +77,15 @@ class Player:
         self.hp_max = None
         self.equip = {"weapon":None,"armor":None,"shield":None,"others":None}
         self.get_job()
+
+####====================================
+
     def __repr__(self):
         return (f"self.in_party = {self.in_party!r}\n"
                 f"self.name = {self.name!r}\n"
                 f"self.job = {self.job!r}\n"
                 f"self.level  = {self.level!r}\n"
+                f"self.exp    = {self.exp!r}\n"
                 f"self.status = {self.status!r}\n"
                 f"self.attack = {self.attack!r}\n"
                 f"self.defence = {self.defence!r}\n"
@@ -72,11 +93,15 @@ class Player:
                 f"self.hp = {self.hp!r}\n"
                 f"self.hp_max = {self.hp_max!r}\n"
                 f"self.equip = {self.equip!r}")
+
+####====================================
+
     def one_string(self):
-        return(f"{self.name:<16}" + 
-               f"{self.job_str():<5}" + 
-               f"{self.status_str()}")
-    
+        str = f"{self.name:<16} {self.job_str():<5} {self.hp}/{self.hp_max}"
+        return(str)
+
+####====================================
+
     def get_job(self):
         match self.job:
             case "fighter":

@@ -18,7 +18,7 @@ class Game:
     def __init__(self):
         sc.screen_init()
 #        item.init_item()
-#        monster.init_monster()
+#        monster.init_monster()c
 
         # self.world = mz.World(self)
 
