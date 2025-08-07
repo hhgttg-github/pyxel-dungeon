@@ -37,7 +37,7 @@ class Guild_Newbi_exe:
     def update(self):
         if vc.guild.check_full():
             sc.ERASE_CENTER_FRAME()
-            sc.text12(4,15,"ギルドまんいん のため、しんき は おことわりです",7)
+            sc.text12(4,15,"ギルドまんいん。しんき は おことわりです",7)
             pyxel.flip()
             time.sleep(2)
             vc.guild.state = "guild_top"

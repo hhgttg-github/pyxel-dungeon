@@ -20,7 +20,7 @@ PARTY_SELECT_LIST = [None,
                      [pyxel.KEY_1,pyxel.KEY_2,pyxel.KEY_3,pyxel.KEY_4]]
 
 def select_party_member(p):
-    n=len(pt.members)
+    n=len(p.members)
     if n==0:
         return(False)
     elif n==1:
@@ -28,8 +28,8 @@ def select_party_member(p):
     else:
         l=PARTY_SELECT_LIST[n] #n=2,3,4のとき
         result=vc.detect_key(l)
-        if result:
-            return(result)
+        if result in PARTY_SELECT_LIST[4]:
+            return(PARTY_SELECT_LIST[4].index(result)) #返すのは1-4のうち1つ
         else:
             return(False)
         
