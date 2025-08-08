@@ -46,23 +46,15 @@ def detect_key(l):
 
 def detect_key_yn():
     
-    # y/n/xで"Y"/"N"/"C"を返す
+    # y/n/xでpyxel.KEY_Y/N/C を返す
     # キーが押されなかったらFalseを返す
     
     l = [pyxel.KEY_Y,pyxel.KEY_N,pyxel.KEY_X,pyxel.KEY_ESCAPE]
     result=list(filter(lambda x:pyxel.btnp(x), l))
-    if result == False:
-        return(None)
+    if result in l:
+        return(result)
     else:
-        match result:
-            case pyxel.KEY_Y:
-                return("Yes")
-            case pyxel.KEY_N:
-                return("No")
-            case pyxel.KEY_X:
-                return("Cancel")
-            case _:
-                return(False)
+        return(False)
 
 ####====================================
 

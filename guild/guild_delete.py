@@ -27,16 +27,15 @@ class Guild_Delete_exe:
 ####====================================
     def check_delete(self):
         k=vc.detect_key_yn()
-        if k=="Yes":
+        if k==pyxel.KEY_Y:
             sc.ERASE_CENTER_FRAME()
             name=self.on_screen_member.name
             sc.text12(6,sc.CENTER_MENU_TOP+2,f"{name}さん を じょめいしました",7)
             pyxel.flip()
             time.sleep(1)
-            return(k)
-        elif (k=="No") or (k=="Cancel"):
+        elif (k==pyxel.KEY_N) or (k==pyxel.KEY_X):
             self.on_screen_member = None
-            return(k)
+            vc.guild.state = "guild_top"
         else:
             pass #未入力でなおも入力待機
                 
@@ -44,15 +43,19 @@ class Guild_Delete_exe:
 
     def update(self):
         if self.on_screen_member:
-            result = self.check_delete()
-            match result:
-                case "Yes":
-                    vc.guild.delete(self.on_screen_member) #実際のdelete処理を
-                    vc.guld.state = "guild_top"
-                case "No":
-                    vc.guild.state = "guild_top"
-                case _:
-                    pass
+            k=vc.detect_key_yn()
+            if k==pyxel.KEY_Y:
+                sc.ERASE_CENTER_FRAME()
+                ne=self.on_screen_member.name
+                sc.text12(6,sc.CENTER_MENU_TOP+2,f"{nm}さん を じょめいしました",7)
+                vc.guild.delete(self.on_screen_member)
+                pyxel.flip()
+                time.sleep(1)
+                self.on_screen_member = None
+                vc.guild.state = "guild_top"
+            elif (k==pyxel.KEY_N) or (k==pyxel.KEY_X):
+                self.on_screen_member = None
+                vc.guild.state = "guild_top"
         else:
             k = vc.detect_key(vc.KEY_AZ)
             if k:
