@@ -51,10 +51,11 @@ def detect_key_yn():
     
     l = [pyxel.KEY_Y,pyxel.KEY_N,pyxel.KEY_X,pyxel.KEY_ESCAPE]
     result=list(filter(lambda x:pyxel.btnp(x), l))
-    if result in l:
-        return(result)
-    else:
-        return(False)
+    if result:
+        result=result[0]
+        print(f"result={result}")
+        if result in l:
+            return(result)
 
 ####====================================
 

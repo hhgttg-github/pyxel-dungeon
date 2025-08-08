@@ -81,7 +81,8 @@ class Guild:
 ####....................................
 
     def delete_member(self,pc):
-        self.members.pop(pc)
+        if pc in self.members:
+            self.members.remove(pc)
 
 ####....................................
 
