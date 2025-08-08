@@ -69,10 +69,10 @@ class Party:
         for i in range(1,PARTY_MAX+1):
             sc.text12(0,sc.PARTY_MEMBER_TOP+i,f"{i:2}",7)
         y = 0
-        if self.members:
+        if not(self.check_empty()):
             for pc in self.members:
                 sc.text12(3, sc.PARTY_MEMBER_TOP+y+1, f"{pc.one_string()}", 7)
-            y += 1
+                y += 1
 
 ####====================================
 
@@ -84,7 +84,7 @@ class Party:
 
     def check_empty(self):
         if len(self.members) == 0:
-            retrun(True)
+            return(True)
         else:
             return(False)
 

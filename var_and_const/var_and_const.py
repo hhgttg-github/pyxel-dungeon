@@ -35,13 +35,35 @@ KEY_SRE = [pyxel.KEY_SPACE, pyxel.KEY_RETURN, pyxel.KEY_ESCAPE]
 KEY_09AZE = KEY_09 + KEY_AZ + [pyxel.KEY_ESCAPE]
 KEY_ANY = KEY_AZ + KEY_09 + KEY_SRE
 
+####====================================
+
 def detect_key(l):
     result=list(filter(lambda x:pyxel.btnp(x), l))
     if result:
         print(f"result={result[0]}")
         return(result[0])
     return(False)
-        
+
+def detect_key_yn():
+    
+    # y/n/xで"Y"/"N"/"C"を返す
+    # キーが押されなかったらFalseを返す
+    
+    l = [pyxel.KEY_Y,pyxel.KEY_N,pyxel.KEY_X,pyxel.KEY_ESCAPE]
+    result=list(filter(lambda x:pyxel.btnp(x), l))
+    if result == False:
+        return(None)
+    else:
+        match result:
+            case pyxel.KEY_Y:
+                return("Yes")
+            case pyxel.KEY_N:
+                return("No")
+            case pyxel.KEY_X:
+                return("Cancel")
+            case _:
+                return(False)
+
 ####====================================
 
 def access_nth(l,n):

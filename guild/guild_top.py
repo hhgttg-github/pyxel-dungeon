@@ -42,6 +42,8 @@ class Guild_Top_exe():
 #       print(f"self.scene[self.state] = {self.scene[self.guild.state]}")
         if pyxel.btnp(pyxel.KEY_C):
             vc.guild.state = "guild_newbi"
+        elif pyxel.btnp(pyxel.KEY_D):
+            vc.guild.state = "guild_delete"
         elif pyxel.btnp(pyxel.KEY_I):
             vc.guild.state = "guild_inspect"
         elif pyxel.btnp(pyxel.KEY_A):

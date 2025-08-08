@@ -52,6 +52,7 @@ class Guild:
         
         self.scene["guild_top"] = gd.guild_top.Guild_Top_exe()
         self.scene["guild_newbi"] = gd.guild_newbi.Guild_Newbi_exe()
+        self.scene["guild_delete"] = gd.guild_delete.Guild_Delete_exe()
         self.scene["guild_inspect"] = gd.guild_inspect.Guild_Inspect_exe()
         self.scene["guild_add_party"] = gd.guild_add_party.Guild_Add_Party_exe()
         if os.path.exists(GUILD_FILE):
@@ -79,18 +80,8 @@ class Guild:
             
 ####....................................
 
-    def delete_member(self):
-        pass
-
-####....................................
-
-    def add_fellow(self):
-        pass
-
-####....................................
-
-    def remove_fellow(self):
-        pass
+    def delete_member(self,pc):
+        self.members.pop(pc)
 
 ####....................................
 

@@ -30,8 +30,8 @@ class Guild_Add_Party_exe:
         i = vc.guild.select_guild_members()
         if (i==False) or (i==None):
             return()
-        if i>=0:
-            pc = vc.guild.members[i]
+        if i>=1:
+            pc = vc.guild.members[i-1]
             print(pc)
             if pc.in_party:
                 sc.ERASE_CENTER_FRAME()
