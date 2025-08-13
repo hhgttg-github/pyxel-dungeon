@@ -53,7 +53,6 @@ def detect_key_yn():
     result=list(filter(lambda x:pyxel.btnp(x), l))
     if result:
         result=result[0]
-        print(f"result={result}")
         if result in l:
             return(result)
 

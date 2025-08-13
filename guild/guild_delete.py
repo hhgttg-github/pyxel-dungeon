@@ -29,11 +29,12 @@ class Guild_Delete_exe:
     def update(self):
         if self.on_screen_member:
             k=vc.detect_key_yn()
-            print(f"k={k}")
             if k==pyxel.KEY_Y:
                 sc.ERASE_CENTER_FRAME()
                 nm=self.on_screen_member.name
                 sc.text12(6,sc.CENTER_MENU_TOP+2,f"{nm}さん を じょめいしました",7)
+                if self.on_screen_member.in_party:
+                    vc.party.remove_member(self.on_screen_member)
                 vc.guild.delete_member(self.on_screen_member)
                 pyxel.flip()
                 time.sleep(1)

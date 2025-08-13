@@ -58,9 +58,13 @@ class Party:
 
 ####====================================
 
-    def remove(self,pc):
-        pc.in_party = False
-        self.members.pop(pc)
+    def remove_member(self,pc):
+        if pc:
+            pc.in_party = False
+            self.members.remove(pc)
+            print("Member Removed")
+            for i in self.members:
+                print(f"Name={i.name} ",end=":")
 
 ####====================================
 
