@@ -27,15 +27,13 @@ class Guild_Remove_Party_exe:
 ####====================================
 
     def update(self):
-        k = vc.detect_key(vc.KEY_AZ)
-            if k:
-                if k == pyxel.KEY_X:
-                    vc.guild.state = "guild_top"              
-                else:
-                    i = k - ord('a')
-                    count_members = len(vc.guild.members) - 1
-                    if i <= count_members:
-                        self.on_screen_member = vc.guild.members[i]
+        k = vc.detect_key_party_member()
+        if k:
+            if k == pyxel.KEY_X:
+                vc.guild.state = "guild_top"              
+            else:
+                pc = vc.party.members[k-1]
+                vc.party.remove_member(pc)
 
 ####====================================
 
@@ -55,4 +53,5 @@ class Guild_Remove_Party_exe:
             pyxel.flip()
             time.sleep(1)
             vc.guild.state = "guild_top"
+        else:
             sc.text12(6,sc.CENTER_MENU_TOP+2,"だれ を パーティから はずしますか？  (X)もどる",7)
