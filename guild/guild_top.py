@@ -22,8 +22,8 @@ GUILD_TOP_KEYS = [pyxel.KEY_C, pyxel.KEY_D,      # CREATE, DELETE
 
 def draw_guild_top_menu():
     sc.line_horizontal(GUILD_TOP_MENU_TOP-1,"- ")
-    sc.text12( 2,GUILD_TOP_MENU_TOP+1,"I)nspect,   A)dd to party,   R)emove from party",7)
-    sc.text12( 2,GUILD_TOP_MENU_TOP+3,"C)reate Newbi,   D)elete Member  (X) to Exit Guild",7)
+    sc.text12( 2,GUILD_TOP_MENU_TOP+1,"I)nspect   A)dd to party   R)emove from party",7)
+    sc.text12( 2,GUILD_TOP_MENU_TOP+3,"C)reate Newbi   D)elete Member   (X) to Exit Guild",7)
 
 ####====================================
 #### CLASS
@@ -51,9 +51,7 @@ class Guild_Top_exe():
         elif pyxel.btnp(pyxel.KEY_R):
             vc.guild.state = "guild_remove_party"
         elif pyxel.btnp(pyxel.KEY_X):
-            print("quit_guild_top")
-            print("game.sceneは変更なし。guild_topのまま")
-            #self.game.scene = "castle_top"
+            self.game.scene = "castle_top"
 
 ####====================================
 

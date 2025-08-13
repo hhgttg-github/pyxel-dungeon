@@ -42,7 +42,6 @@ class Guild_Add_Party_exe:
             else:
                 pc.in_party = True
                 vc.party.members.append(pc)
-                vc.guild.state = "guild_top"
         else:
             vc.guild.state = "guild_top"
 
