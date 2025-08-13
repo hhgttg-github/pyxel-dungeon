@@ -31,6 +31,9 @@ KEY_DIR = [pyxel.KEY_LEFT, pyxel.KEY_RIGHT, pyxel.KEY_UP, pyxel.KEY_DOWN]
 
 KEY_AZ = [x for x in range(pyxel.KEY_A,pyxel.KEY_Z+1)]
 KEY_09 = [x for x in range(pyxel.KEY_0,pyxel.KEY_9)]
+KEY_14 = [pyxel.KEY_1,pyxel.KEY_2,pyxel.KEY_3,pyxel.KEY_4]
+# pyxel.KEY_1 = 49, k-48=n
+KEY_14X = KEY_14 + [pyxel.KEY_X]
 KEY_SRE = [pyxel.KEY_SPACE, pyxel.KEY_RETURN, pyxel.KEY_ESCAPE]
 KEY_09AZE = KEY_09 + KEY_AZ + [pyxel.KEY_ESCAPE]
 KEY_ANY = KEY_AZ + KEY_09 + KEY_SRE
@@ -55,6 +58,20 @@ def detect_key_yn():
         result=result[0]
         if result in l:
             return(result)
+
+def detect_key_party_member():
+    result=list(filter(lambda x:pyxel.btnp(x), KEY_14X))
+    if result:
+        result=result[0]
+        if result==pyxel.KEY_X:
+            return(result)
+        elif result in KEY_14:
+            n=len(party.members)
+            k= result - 48 # pyxel.KEY_1=49
+            if k<=n:
+                return(k)
+            else:
+                return(False)
 
 ####====================================
 

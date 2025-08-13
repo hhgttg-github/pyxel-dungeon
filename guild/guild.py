@@ -55,6 +55,7 @@ class Guild:
         self.scene["guild_delete"] = gd.guild_delete.Guild_Delete_exe()
         self.scene["guild_inspect"] = gd.guild_inspect.Guild_Inspect_exe()
         self.scene["guild_add_party"] = gd.guild_add_party.Guild_Add_Party_exe()
+        self.scene["guild_remove_party"] = gd.guild_remove_party.Guild_Remove_Party_exe()
         if os.path.exists(GUILD_FILE):
             self.load()
 
