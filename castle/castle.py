@@ -49,7 +49,6 @@ class Castle:
         elif pyxel.btnp(pyxel.KEY_M):
             vc.game.state = "maze"
             vc.maze.state = "maze_entrance"
-        print(f"vc.game.state = {vc.game.state}")
 
 ####////////////////////////////////////
 
