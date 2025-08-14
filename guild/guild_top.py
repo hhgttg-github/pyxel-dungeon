@@ -30,12 +30,12 @@ def draw_guild_top_menu():
 
 class Guild_Top_exe():
 
-####====================================
+####////////////////////////////////////
 
     def __init__(self):
         self.exit = False
 
-####====================================
+####////////////////////////////////////
 
     def update(self):
 #       print(f"self.state = {self.guild.state}")
@@ -51,9 +51,9 @@ class Guild_Top_exe():
         elif pyxel.btnp(pyxel.KEY_R):
             vc.guild.state = "guild_remove_party"
         elif pyxel.btnp(pyxel.KEY_X):
-            self.game.scene = "castle_top"
+            vc.game.state = "castle"
 
-####====================================
+####////////////////////////////////////
 
     def draw(self):
         pyxel.cls(0)

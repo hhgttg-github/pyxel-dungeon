@@ -3,6 +3,8 @@ import pyxel
 
 import guild as gd
 import party.party as pt
+import castle.castle
+import inn.inn
 
 ####===================================
 #### VARIABLES
@@ -14,6 +16,10 @@ monster_db = None
 
 guild = gd.guild.Guild()
 party = pt.Party()
+
+castle = castle.castle.Castle()
+inn = inn.inn.Inn()
+
 maze = None
 
 ####====================================

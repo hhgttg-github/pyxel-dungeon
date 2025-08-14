@@ -23,14 +23,15 @@ def draw_castle_top_menu():
 
 ####====================================
 #### CLASS
+
 class Castle_Top_exe():
     
-####====================================
+####////////////////////////////////////
 
     def __init__(self):
         pass
 
-####====================================
+####////////////////////////////////////
 
     def update(self):
         if pyxel.btnp(pyxel.KEY_G):
@@ -48,7 +49,7 @@ class Castle_Top_exe():
             vc.game.state = "maze"
             vc.maze.state = "maze_entrance"
 
-####====================================
+####////////////////////////////////////
 
     def draw(self):
         pyxel.cls(0)

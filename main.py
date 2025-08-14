@@ -23,9 +23,13 @@ class Game:
         # self.world = mz.World(self)
 
         self.scene = {}
-        self.state = "guild"
 
-        self.scene["guild"] = vc.guild
+        self.scene["guild"]  = vc.guild
+        self.scene["castle"] = vc.castle
+        self.scene["inn"]    = vc.inn
+        
+        self.state = "castle"
+
 #         #self.scene["castle_top"] = castle.Castle_Top_exe()
 #         # self.scene["maze"] = maze.maze.Maze_Top_exe()
 #         # self.scene["camp"] = player.Camp_Top_exe()
