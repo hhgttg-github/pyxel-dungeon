@@ -6,6 +6,7 @@ import party  as pt
 import player as pl
 
 import guild  as gd
+import store
 
 ####====================================
 #### CONSTANT
@@ -15,15 +16,15 @@ STORE_TOP_MENU_TOP = 12
 ####====================================
 #### FUNCTIONS
 
-def draw_store_top_menu():
+def draw_store_buy_menu():
     sc.line_horizontal(STORE_TOP_MENU_TOP-1,"- ")
-    sc.text12( 25,STORE_TOP_MENU_TOP+1,"P)urchase   S)ell",7)
+    sc.text12( 25,STORE_TOP_MENU_TOP+1,"///商品選択",7)
     sc.text12( 30,STORE_TOP_MENU_TOP+3,"X) to Leave",7)
 
 ####====================================
 #### CLASS
 
-class Store_Top_exe():
+class Store_Buy_exe():
 
 ####////////////////////////////////////
 
@@ -33,12 +34,8 @@ class Store_Top_exe():
 ####////////////////////////////////////
 
     def update(self):
-        if pyxel.btnp(pyxel.KEY_P):
-            vc.guild.state = "store_buy"
-        elif pyxel.btnp(pyxel.KEY_S):
-            vc.guild.state = "store_sell"
-        elif pyxel.btnp(pyxel.KEY_X):
-            vc.game.state = "castle"
+        if pyxel.btnp(pyxel.KEY_X):
+            vc.store.state = "store_top"
 
 ####////////////////////////////////////
 
@@ -48,4 +45,4 @@ class Store_Top_exe():
 
         vc.party.list_party_members()
         
-        draw_store_top_menu()
+        draw_store_buy_menu()

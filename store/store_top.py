@@ -17,8 +17,8 @@ STORE_TOP_MENU_TOP = 12
 
 def draw_store_top_menu():
     sc.line_horizontal(STORE_TOP_MENU_TOP-1,"- ")
-    sc.text12( 25,STORE_TOP_MENU_TOP+1,"P)urchase   S)ell",7)
-    sc.text12( 30,STORE_TOP_MENU_TOP+3,"X) to Leave",7)
+    sc.text12(15,STORE_TOP_MENU_TOP+1,"P)urchase   S)ell",7)
+    sc.text12(20,STORE_TOP_MENU_TOP+3,"X) to Leave",7)
 
 ####====================================
 #### CLASS

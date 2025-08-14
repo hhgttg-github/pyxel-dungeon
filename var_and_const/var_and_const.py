@@ -5,6 +5,7 @@ import guild as gd
 import party.party as pt
 import castle.castle
 import inn.inn
+import store.store
 
 ####===================================
 #### VARIABLES
