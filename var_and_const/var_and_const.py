@@ -18,7 +18,8 @@ guild = gd.guild.Guild()
 party = pt.Party()
 
 castle = castle.castle.Castle()
-inn = inn.inn.Inn()
+inn    = inn.inn.Inn()
+store  = store.store.Store()
 
 maze = None
 

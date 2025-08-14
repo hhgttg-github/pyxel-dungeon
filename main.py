@@ -27,6 +27,7 @@ class Game:
         self.scene["guild"]  = vc.guild
         self.scene["castle"] = vc.castle
         self.scene["inn"]    = vc.inn
+        self.scene["store"]  = vc.store
 
         self.state = "castle"
 
